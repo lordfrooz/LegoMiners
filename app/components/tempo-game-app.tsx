@@ -9,8 +9,7 @@ import { useTempoGameState } from "../lib/tempo-game-state";
 
 const WHITELIST_X_ACCOUNT = process.env.NEXT_PUBLIC_WHITELIST_X_ACCOUNT as string;
 const WHITELIST_TWEET_ID = process.env.NEXT_PUBLIC_WHITELIST_TWEET_ID as string;
-const WHITELIST_SHARE_TEXT =
-  "Joining Tempo Topia Early Access on @tempo. Early Access for early supporters.";
+const WHITELIST_SHARE_TEXT = `Joining Tempo Topia Early Access on @${WHITELIST_X_ACCOUNT}. Built on Tempo for early supporters.`;
 const WHITELIST_SHARE_URL = "https://tempotopia.xyz";
 
 const whitelistTasks = [
@@ -38,9 +37,8 @@ const whitelistTasks = [
   },
   {
     id: "notifications",
-    label: "Notify",
-    // Linki uygulamanın env dosyasından çekiyoruz:
-    href: process.env.NEXT_PUBLIC_PROFILE_LINK || `https://x.com/${WHITELIST_X_ACCOUNT}`,
+    label: "Follow",
+    href: `https://twitter.com/intent/follow?screen_name=${WHITELIST_X_ACCOUNT}`,
   },
 ];
 
