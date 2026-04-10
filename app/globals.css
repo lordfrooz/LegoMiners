@@ -4610,14 +4610,40 @@ button {
   }
 
   .whitelist-gate {
+    --whitelist-mobile-gate-x: 72px;
+    --whitelist-mobile-gate-y: -18px;
+    --whitelist-mobile-intro-x: 75px;
+    --whitelist-mobile-intro-y: 180px;
     gap: 0;
-    transform: translate(72px, -18px);
+    transform: translate(var(--whitelist-mobile-gate-x), var(--whitelist-mobile-gate-y));
     scale: 0.45;
     transform-origin: top center;
   }
 
+  .whitelist-gate-twitter,
+  .whitelist-gate-wallet {
+    --whitelist-mobile-gate-x: 170px;
+    --whitelist-mobile-gate-y: -18px;
+    --whitelist-mobile-intro-x: 75px;
+    --whitelist-mobile-intro-y: 180px;
+  }
+
+  .whitelist-gate-tasks {
+    --whitelist-mobile-gate-x: 190px;
+    --whitelist-mobile-gate-y: 200px;
+    --whitelist-mobile-intro-x: 75px;
+    --whitelist-mobile-intro-y: 180px;
+  }
+
+  .whitelist-gate-confirm {
+    --whitelist-mobile-gate-x: 170px;
+    --whitelist-mobile-gate-y: 0px;
+    --whitelist-mobile-intro-x: 75px;
+    --whitelist-mobile-intro-y: 180px;
+  }
+
   .whitelist-gate-intro {
-    transform: translate(110px, 420px) rotate(-3deg) skewX(6deg);
+    transform: translate(var(--whitelist-mobile-intro-x), var(--whitelist-mobile-intro-y)) rotate(-3deg) skewX(6deg);
   }
 
   .whitelist-gate-actions {

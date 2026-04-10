@@ -230,7 +230,7 @@ export function TempoGameApp() {
 
         {isReady && !isRestoring && !isWhitelistSubmitted ? (
           <section className="wallet-gate whitelist-gate-stage">
-            <div className="wallet-gate-minimal whitelist-gate">
+            <div className={`wallet-gate-minimal whitelist-gate whitelist-gate-${whitelistStep}`}>
               <div className="wallet-gate-intro whitelist-gate-intro">
                 <h2>
                   Join the <span className="brand-accent">Tempo Topia</span>
@@ -336,7 +336,7 @@ export function TempoGameApp() {
 
         {isReady && !isRestoring && isWhitelistSubmitted ? (
           <section className="wallet-gate whitelist-gate-stage">
-            <div className="wallet-gate-minimal whitelist-gate whitelist-confirm-shell">
+            <div className="wallet-gate-minimal whitelist-gate whitelist-gate-confirm whitelist-confirm-shell">
               <div className="wallet-gate-intro whitelist-gate-intro whitelist-confirm-intro">
                 <div className="whitelist-confirm-card">
                   <span className="whitelist-confirm-kicker">Confirmed ✅</span>
