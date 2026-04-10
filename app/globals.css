@@ -4558,7 +4558,7 @@ button {
   .whitelist-panel {
     width: min(100%, 340px);
     padding: 14px;
-    margin-top: 100px;
+    margin-top: 16px;
     /* 3 parmak yukarıya çektik */
   }
 
@@ -4569,8 +4569,8 @@ button {
   }
 
   .whitelist-confirm-intro {
-    margin-top: 380px;
-    margin-left: -48px;
+    margin-top: 120px;
+    margin-left: -32px;
   }
 
   .whitelist-gate-intro .whitelist-task-stack {
@@ -4616,7 +4616,7 @@ button {
   }
 
   .whitelist-gate-intro {
-    transform: translate(150px, 550px) rotate(-3deg) skewX(6deg);
+    transform: translate(96px, 180px) rotate(-3deg) skewX(6deg);
   }
 
   .whitelist-gate-actions {
