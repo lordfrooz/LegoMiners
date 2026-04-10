@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@rainbow-me/rainbowkit/styles.css";
 import { IBM_Plex_Mono, Inter, Poppins } from "next/font/google";
 import "./globals.css";
@@ -40,6 +40,13 @@ export const metadata: Metadata = {
     icon: "/logo.jpg",
     apple: "/logo.jpg",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 export default function RootLayout({
