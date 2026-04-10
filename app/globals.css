@@ -4351,10 +4351,10 @@ button {
 
 .whitelist-task-submit-stack .whitelist-submit-button {
   width: 100%;
-  min-height: 38px;
+  min-height: 48px;
   margin-top: 0;
-  padding: 0 12px;
-  font-size: 0.74rem;
+  padding: 0 18px;
+  font-size: 0.92rem;
 }
 
 .wallet-gate-actions-minimal .whitelist-submit-button {
@@ -4617,7 +4617,7 @@ button {
   }
 
   .whitelist-gate-intro {
-    transform: translate(150px, 600px) rotate(-3deg) skewX(6deg);
+    transform: translate(110px, 420px) rotate(-3deg) skewX(6deg);
   }
 
   .whitelist-gate-actions {
