@@ -4574,7 +4574,7 @@ button {
   }
 
   .whitelist-gate-intro .whitelist-task-stack {
-    margin-top: 24px;
+    margin-top: 84px;
   }
 
   .whitelist-field span {
@@ -4616,7 +4616,7 @@ button {
   }
 
   .whitelist-gate-intro {
-    transform: translate(96px, 180px) rotate(-3deg) skewX(6deg);
+    transform: translate(96px, 240px) rotate(-3deg) skewX(6deg);
   }
 
   .whitelist-gate-actions {
