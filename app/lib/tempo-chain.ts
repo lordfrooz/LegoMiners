@@ -35,7 +35,7 @@ export const wagmiConfig = getDefaultConfig({
   appName: "Tempo Topia",
   appDescription: "Agent-themed GameFi command center on Tempo.",
   appUrl: "https://tempo.xyz",
-  appIcon: "/logo.png",
+  appIcon: "/logo.jpg",
   projectId: walletConnectProjectId,
   chains: [tempoTestnet],
   transports: {

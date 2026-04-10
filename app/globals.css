@@ -4522,6 +4522,11 @@ button {
     padding: 22px 16px 28px;
   }
 
+  .whitelist-confirm-intro {
+    margin-top: 350px;
+    margin-left: -30px;
+  }
+
   .whitelist-field span {
     text-align: left;
     font-size: 0.55rem;

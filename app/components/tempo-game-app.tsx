@@ -6,11 +6,11 @@ import { Turnstile } from "@marsidev/react-turnstile";
 import connectPhoto from "../../connect_photo.png";
 import { useTempoGameState } from "../lib/tempo-game-state";
 
-const WHITELIST_X_ACCOUNT = "tempo";
-const WHITELIST_TWEET_ID = "2008591454898401294";
+const WHITELIST_X_ACCOUNT = process.env.NEXT_PUBLIC_WHITELIST_X_ACCOUNT as string;
+const WHITELIST_TWEET_ID = process.env.NEXT_PUBLIC_WHITELIST_TWEET_ID as string;
 const WHITELIST_SHARE_TEXT =
-  "Joining Tempo Topia Early Access on @tempo. Building on Tempo Testnet.";
-const WHITELIST_SHARE_URL = "https://tempo.xyz";
+  "Joining Tempo Topia Early Access on @tempo. Early Access for early supporters.";
+const WHITELIST_SHARE_URL = "https://tempotopia.xyz";
 
 const whitelistTasks = [
   {
@@ -118,7 +118,7 @@ export function TempoGameApp() {
 
   async function handleTwitterContinue() {
     if (!canAdvanceTwitter) return;
-    
+
     try {
       const normalized = twitterHandle.trim().replace(/^@+/, "");
       const res = await fetch(`/api/whitelist?twitterHandle=${encodeURIComponent(normalized)}`);
@@ -130,7 +130,7 @@ export function TempoGameApp() {
           setCompletedTasks(d.completedTasks || []);
           setWhitelistStep(d.whitelistStep || "wallet");
           setIsWhitelistSubmitted(d.isWhitelistSubmitted || false);
-          
+
           saveStateAndSync({
             twitterHandle: normalized,
             walletAddress: d.walletAddress,
@@ -141,10 +141,10 @@ export function TempoGameApp() {
           return;
         }
       }
-    } catch(e) {
+    } catch (e) {
       console.error("Failed to fetch handle", e);
     }
-    
+
     setWhitelistStep("wallet");
     saveStateAndSync({ twitterHandle, whitelistStep: "wallet" });
   }
@@ -251,9 +251,8 @@ export function TempoGameApp() {
                   <div className="whitelist-task-grid">
                     {whitelistTasks.map((task) => (
                       <button
-                        className={`whitelist-task-button ${
-                          completedTasks.includes(task.id) ? "whitelist-task-button-complete" : ""
-                        }`}
+                        className={`whitelist-task-button ${completedTasks.includes(task.id) ? "whitelist-task-button-complete" : ""
+                          }`}
                         key={task.id}
                         onClick={() => handleWhitelistTaskClick(task.id, task.href)}
                         type="button"
@@ -303,9 +302,8 @@ export function TempoGameApp() {
                   ) : null}
 
                   <button
-                    className={`wallet-button whitelist-submit-button ${
-                      whitelistStep === "tasks" ? "whitelist-submit-button-ready" : ""
-                    }`}
+                    className={`wallet-button whitelist-submit-button ${whitelistStep === "tasks" ? "whitelist-submit-button-ready" : ""
+                      }`}
                     disabled={
                       whitelistStep === "twitter"
                         ? !canAdvanceTwitter

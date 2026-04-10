@@ -23,12 +23,22 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tempo Topia | Tempo Agent GameFi",
-  description:
-    "A monochrome wallet-gated GameFi command center designed for the Tempo network.",
+  title: "TempoTopia | a new standart",
+  description: "TempoTopia | a new standart",
+  openGraph: {
+    title: "TempoTopia | a new standart",
+    description: "TempoTopia | a new standart",
+    images: ["/logo.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TempoTopia | a new standart",
+    description: "TempoTopia | a new standart",
+    images: ["/logo.jpg"],
+  },
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
   },
 };
 
