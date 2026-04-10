@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import connectPhoto from "../../connect_photo.png";
+import mobilePhoto from "../../mobile_photo.jpeg";
 import { useTempoGameState } from "../lib/tempo-game-state";
 
 const WHITELIST_X_ACCOUNT = process.env.NEXT_PUBLIC_WHITELIST_X_ACCOUNT as string;
@@ -205,10 +206,17 @@ export function TempoGameApp() {
       >
         <Image
           alt=""
-          className="tempo-scene-background-image"
+          className="tempo-scene-background-image tempo-scene-background-image-desktop"
           fill
           priority
           src={connectPhoto}
+        />
+        <Image
+          alt=""
+          className="tempo-scene-background-image tempo-scene-background-image-mobile"
+          fill
+          priority
+          src={mobilePhoto}
         />
       </div>
 
@@ -261,6 +269,28 @@ export function TempoGameApp() {
                       </button>
                     ))}
                   </div>
+                  {whitelistStep === "tasks" ? (
+                    <div className="whitelist-task-submit-stack">
+                      <div className="turnstile-wrapper whitelist-task-turnstile">
+                        <Turnstile
+                          ref={turnstileRef}
+                          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                          onSuccess={(token) => setTurnstileToken(token)}
+                          onExpire={() => setTurnstileToken(null)}
+                          onError={() => setTurnstileToken(null)}
+                          options={{ theme: "light", size: "normal" }}
+                        />
+                      </div>
+                      <button
+                        className="whitelist-task-button whitelist-task-button-submit"
+                        disabled={!canSubmitWhitelist}
+                        onClick={handleWhitelistSubmit}
+                        type="button"
+                      >
+                        Join Early Access
+                      </button>
+                    </div>
+                  ) : null}
                 </div>
 
                 <div className="whitelist-panel whitelist-panel-inline">
@@ -276,19 +306,6 @@ export function TempoGameApp() {
                     </label>
                   ) : null}
 
-                  {whitelistStep === "tasks" ? (
-                    <div className="turnstile-wrapper">
-                      <Turnstile
-                        ref={turnstileRef}
-                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-                        onSuccess={(token) => setTurnstileToken(token)}
-                        onExpire={() => setTurnstileToken(null)}
-                        onError={() => setTurnstileToken(null)}
-                        options={{ theme: "light", size: "normal" }}
-                      />
-                    </div>
-                  ) : null}
-
                   {whitelistStep === "wallet" ? (
                     <label className="whitelist-field">
                       <span>EVM wallet address</span>
@@ -301,31 +318,16 @@ export function TempoGameApp() {
                     </label>
                   ) : null}
 
-                  <button
-                    className={`wallet-button whitelist-submit-button ${whitelistStep === "tasks" ? "whitelist-submit-button-ready" : ""
-                      }`}
-                    disabled={
-                      whitelistStep === "twitter"
-                        ? !canAdvanceTwitter
-                        : whitelistStep === "wallet"
-                          ? !canAdvanceWallet
-                          : !canSubmitWhitelist
-                    }
-                    onClick={
-                      whitelistStep === "twitter"
-                        ? handleTwitterContinue
-                        : whitelistStep === "wallet"
-                          ? handleWalletContinue
-                          : handleWhitelistSubmit
-                    }
-                    type="button"
-                  >
-                    {whitelistStep === "twitter"
-                      ? "Continue"
-                      : whitelistStep === "wallet"
-                        ? "Continue"
-                        : "Join Early Access"}
-                  </button>
+                  {whitelistStep !== "tasks" ? (
+                    <button
+                      className="wallet-button whitelist-submit-button"
+                      disabled={whitelistStep === "twitter" ? !canAdvanceTwitter : !canAdvanceWallet}
+                      onClick={whitelistStep === "twitter" ? handleTwitterContinue : handleWalletContinue}
+                      type="button"
+                    >
+                      Continue
+                    </button>
+                  ) : null}
                 </div>
               </div>
             </div>

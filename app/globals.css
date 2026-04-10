@@ -77,6 +77,10 @@ button {
   transform: none;
 }
 
+.tempo-scene-background-image-mobile {
+  display: none;
+}
+
 .tempo-scene-background-soft::after {
   content: none;
 }
@@ -2677,7 +2681,7 @@ button {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .tempo-frame {
     width: min(100%, calc(100% - 16px));
   }
@@ -4320,6 +4324,38 @@ button {
   text-transform: uppercase;
 }
 
+.whitelist-task-submit-stack {
+  display: grid;
+  gap: 8px;
+  width: min(330px, 100%);
+  margin: 8px auto 0;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(220, 232, 244, 0.14) 100%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.08) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 12px 28px rgba(8, 12, 10, 0.14);
+  backdrop-filter: blur(16px) saturate(1.08);
+  -webkit-backdrop-filter: blur(16px) saturate(1.08);
+}
+
+.whitelist-task-turnstile {
+  min-height: 52px;
+  transform: scale(0.9);
+  transform-origin: top center;
+}
+
+.whitelist-task-submit-stack .whitelist-submit-button {
+  width: 100%;
+  min-height: 38px;
+  margin-top: 0;
+  padding: 0 12px;
+  font-size: 0.74rem;
+}
+
 .wallet-gate-actions-minimal .whitelist-submit-button {
   position: relative;
   isolation: isolate;
@@ -4471,44 +4507,40 @@ button {
 }
 
 @media (max-width: 720px) {
+  html,
+  body {
+    overflow: hidden;
+  }
+
+  .tempo-shell {
+    overflow: hidden;
+    max-height: 100vh;
+  }
+
   .wallet-gate-minimal {
     width: min(100vw - 24px, 100%);
-    gap: 16px;
+    gap: 18px;
   }
 
   .wallet-gate-minimal.whitelist-gate {
     width: min(100vw - 24px, 100%);
-    transform: none;
   }
 
   .wallet-gate-intro h2 {
-    max-width: 11ch;
-    font-size: clamp(1.72rem, 9vw, 2.2rem);
-    line-height: 0.96;
-    letter-spacing: -0.05em;
+    font-size: clamp(1.72rem, 9vw, 2.4rem);
     white-space: normal;
   }
 
   .wallet-gate-intro p {
-    max-width: 32ch;
-    font-size: 0.88rem;
-    line-height: 1.5;
+    font-size: 0.96rem;
   }
 
   .wallet-gate-intro {
-    gap: 14px;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-    padding-top: 18px;
-    transform: none;
+    transform: translateY(-100px) rotate(-3deg) skewX(6deg);
   }
 
   .wallet-gate-actions-minimal .wallet-button {
-    min-width: 100%;
-    min-height: 48px;
-    padding: 0 24px;
-    font-size: 0.86rem;
+    min-width: 240px;
   }
 
   .wallet-gate-actions-minimal .whitelist-submit-button {
@@ -4518,138 +4550,100 @@ button {
   }
 
   .wallet-gate-actions-minimal {
-    width: 100%;
     padding-left: 0;
-    padding-top: 12px;
-    transform: none;
+    padding-top: 24px;
+    transform: translateY(-100px) rotate(-3deg) skewX(6deg);
   }
 
   .whitelist-panel {
     width: min(100%, 340px);
-    gap: 10px;
     padding: 14px;
-    margin-top: 6px;
+    margin-top: 100px;
+    /* 3 parmak yukarıya çektik */
   }
 
   .whitelist-confirm-card {
     width: min(100%, 340px);
-    min-height: 0;
-    padding: 22px 16px 26px;
+    min-height: 300px;
+    padding: 22px 16px 28px;
   }
 
   .whitelist-confirm-intro {
-    width: 100%;
+    margin-top: 380px;
+    margin-left: -48px;
+  }
+
+  .whitelist-gate-intro .whitelist-task-stack {
     margin-top: 24px;
-    margin-left: 0;
   }
 
   .whitelist-field span {
     text-align: left;
-    font-size: 0.52rem;
-    margin-left: 2px;
-  }
-
-  .whitelist-field {
-    width: 100%;
-    gap: 5px;
+    font-size: 0.55rem;
+    margin-left: 4px;
+    /* Sola daha da yasladık */
   }
 
   .whitelist-field input {
     min-width: 0;
     width: 100%;
     max-width: 100%;
-    min-height: 42px;
-    padding: 0 14px;
-    font-size: 0.78rem;
-  }
-
-  .whitelist-field:last-of-type input {
-    font-size: 0.72rem;
-  }
-
-  .whitelist-task-stack {
-    width: 100%;
-    gap: 12px;
-    margin-top: 4px;
-  }
-
-  .whitelist-task-label {
-    min-height: 30px;
-    padding: 0 14px;
-    font-size: 0.62rem;
-  }
-
-  .whitelist-profile-pill {
-    width: 100%;
-    justify-content: flex-start;
-    min-height: 54px;
-    padding: 10px 12px;
-  }
-
-  .whitelist-profile-copy strong {
-    font-size: 0.88rem;
   }
 
   .whitelist-task-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Eski dikey (alt alta) düzene dönüyoruz */
+    grid-template-columns: 1fr;
     gap: 8px;
-    justify-items: stretch;
+    justify-items: center;
+    /* Kutuları ortala */
   }
 
   .whitelist-task-button {
-    width: 100% !important;
-    min-height: 42px;
-    padding: 0 10px;
-    font-size: 0.74rem;
+    width: 50% !important;
   }
 
   .whitelist-submit-button {
-    width: 100%;
-    margin: 4px auto 0;
-    min-height: 42px;
-    font-size: 0.8rem;
+    width: 60%;
+    margin: 0 auto;
+    min-height: 36px;
   }
 
   .whitelist-gate {
     gap: 0;
-    transform: none;
+    transform: translate(72px, -18px);
+    scale: 0.45;
+    transform-origin: top center;
   }
 
   .whitelist-gate-intro {
-    transform: none;
+    transform: translate(150px, 550px) rotate(-3deg) skewX(6deg);
   }
 
   .whitelist-gate-actions {
     padding-left: 0;
     padding-top: 0;
-    transform: none;
+    transform: translate(14px, -52px) rotate(-3deg) skewX(6deg);
   }
 
-  .whitelist-confirm-kicker {
-    min-height: 30px;
-    font-size: 0.6rem;
+  .whitelist-task-submit-stack {
+    width: min(330px, calc(100vw - 48px));
+    margin-top: 8px;
+    margin-left: 0;
+    margin-right: auto;
+    transform: translateX(-0px);
   }
 
-  .whitelist-confirm-avatar {
-    width: 60px;
-    height: 60px;
+  .whitelist-task-turnstile {
+    min-height: 46px;
+    transform: scale(0.84);
   }
 
-  .whitelist-confirm-copy strong {
-    font-size: 1rem;
+  .tempo-scene-background-image-desktop {
+    display: none;
   }
 
-  .whitelist-confirm-copy p {
-    font-size: 0.86rem;
-  }
-
-  .whitelist-confirm-x {
-    width: 46px;
-    height: 46px;
-  }
-
-  .whitelist-confirm-x-icon {
-    width: 16px;
-    height: 16px;
+  .tempo-scene-background-image-mobile {
+    display: block;
+    object-position: center top;
   }
 }
