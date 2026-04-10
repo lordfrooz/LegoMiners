@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 // Load MongoDB URI from environment variables
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
+// Validate MongoDB URI is provided
 if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
 }
