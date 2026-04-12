@@ -4,3 +4,8 @@ npm-debug.log*
 dist
 coverage
 .DS_Store
+.env.local
+*.tsbuildinfo
+.codex
+app/.codex
+*:Zone.Identifier

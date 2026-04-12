@@ -1,32 +1,6 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { defineChain, http } from "viem";
-
-export const tempoTestnet = defineChain({
-  id: 42431,
-  name: "Tempo Testnet (Moderato)",
-  nativeCurrency: {
-    name: "Tempo USD",
-    symbol: "USD",
-    decimals: 18,
-  },
-  rpcUrls: {
-    default: {
-      http: ["https://rpc.moderato.tempo.xyz"],
-      webSocket: ["wss://rpc.moderato.tempo.xyz"],
-    },
-    public: {
-      http: ["https://rpc.moderato.tempo.xyz"],
-      webSocket: ["wss://rpc.moderato.tempo.xyz"],
-    },
-  },
-  blockExplorers: {
-    default: {
-      name: "Tempo Explorer",
-      url: "https://explore.tempo.xyz",
-    },
-  },
-  testnet: true,
-});
+import { http } from "viem";
+import { tempoMainnet, tempoRpcHttpUrl } from "./tempo-network";
 
 export const walletConnectProjectId =
   process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ?? "tempo-topia-dev";
@@ -37,9 +11,9 @@ export const wagmiConfig = getDefaultConfig({
   appUrl: "https://tempo.xyz",
   appIcon: "/logo.jpg",
   projectId: walletConnectProjectId,
-  chains: [tempoTestnet],
+  chains: [tempoMainnet],
   transports: {
-    [tempoTestnet.id]: http("https://rpc.moderato.tempo.xyz"),
+    [tempoMainnet.id]: http(tempoRpcHttpUrl),
   },
   ssr: true,
 });

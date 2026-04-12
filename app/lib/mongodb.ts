@@ -73,7 +73,176 @@ const WhitelistSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const AuthNonceSchema = new mongoose.Schema(
+  {
+    walletAddress: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+    nonce: {
+      type: String,
+      required: true,
+    },
+    expiresAt: {
+      type: Date,
+      required: true,
+      index: { expires: 0 },
+    },
+  },
+  { timestamps: true }
+);
+
+const SessionSchema = new mongoose.Schema(
+  {
+    walletAddress: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    tokenHash: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    expiresAt: {
+      type: Date,
+      required: true,
+      index: { expires: 0 },
+    },
+  },
+  { timestamps: true }
+);
+
+const PlayerSchema = new mongoose.Schema(
+  {
+    walletAddress: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    packageId: {
+      type: String,
+      enum: ["builder", "trader", "finance"],
+      required: true,
+    },
+    packageSnapshot: {
+      id: { type: String, enum: ["builder", "trader", "finance"], required: true },
+      badge: { type: String, required: true },
+      rarityLabel: { type: String, required: true },
+      title: { type: String, required: true },
+      summary: { type: String, required: true },
+      bonusPercent: { type: Number, required: true, default: 0 },
+      starterAgentType: {
+        type: String,
+        enum: ["builder", "trader", "finance"],
+        required: true,
+      },
+      starterAgentLabel: { type: String, required: true },
+      officeTier: {
+        type: String,
+        enum: ["standard", "luxury", "ultra"],
+        required: true,
+      },
+      officeLabel: { type: String, required: true },
+      agentLimit: { type: Number, required: true },
+      incomePerMinute: { type: Number, required: true },
+      priceBand: { type: String, required: true },
+      landCards: { type: Number, required: true },
+      essenceCards: { type: Number, required: true },
+      ethPrice: { type: String, required: true },
+      pathUsdPrice: { type: String, required: true },
+      detail: { type: String, required: true },
+      guaranteedItems: { type: [String], default: [] },
+    },
+    agents: {
+      type: [
+        {
+          id: { type: String, required: true },
+          type: {
+            type: String,
+            enum: ["builder", "trader", "finance"],
+            required: true,
+          },
+          incomePerMinute: { type: Number, required: true },
+          createdAt: { type: Number, required: true },
+          label: { type: String, required: true },
+          rarity: { type: String, required: true },
+          description: { type: String, required: true },
+        },
+      ],
+      default: [],
+    },
+    agentPositions: {
+      type: [
+        {
+          agentId: { type: String, required: true },
+          x: { type: Number, required: true },
+          y: { type: Number, required: true },
+        },
+      ],
+      default: [],
+    },
+    acquiredAt: {
+      type: Number,
+      required: true,
+    },
+    lastCollectedAt: {
+      type: Number,
+      required: true,
+    },
+    lifetimeCollected: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    purchaseTxHash: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    purchasePaymentToken: {
+      type: String,
+      enum: ["pathusd", "usdc"],
+      default: "pathusd",
+    },
+    marketPurchases: {
+      type: [
+        {
+          itemType: {
+            type: String,
+            enum: ["agent", "slot"],
+            required: true,
+          },
+          itemId: { type: String, required: true },
+          pathUsdPrice: { type: String, required: true },
+          paymentToken: {
+            type: String,
+            enum: ["pathusd", "usdc"],
+            default: "pathusd",
+          },
+          txHash: { type: String, required: true },
+          purchasedAt: { type: Number, required: true },
+        },
+      ],
+      default: [],
+    },
+  },
+  { timestamps: true }
+);
+
 // Prevent redefining the model upon hot-reloads
 export const Whitelist = mongoose.models.Whitelist || mongoose.model("Whitelist", WhitelistSchema);
+export const AuthNonce = mongoose.models.AuthNonce || mongoose.model("AuthNonce", AuthNonceSchema);
+export const Session = mongoose.models.Session || mongoose.model("Session", SessionSchema);
+export const Player = mongoose.models.Player || mongoose.model("Player", PlayerSchema);
 
 export default dbConnect;

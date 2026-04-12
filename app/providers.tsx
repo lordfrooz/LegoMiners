@@ -7,7 +7,8 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { WagmiProvider } from "wagmi";
-import { tempoTestnet, wagmiConfig } from "./lib/tempo-chain";
+import { wagmiConfig } from "./lib/tempo-chain";
+import { tempoMainnet } from "./lib/tempo-network";
 
 type ProvidersProps = {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ export function Providers({ children }: ProvidersProps) {
     <WagmiProvider config={wagmiConfig} reconnectOnMount={false}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider
-          initialChain={tempoTestnet}
+          initialChain={tempoMainnet}
           modalSize="compact"
           theme={darkTheme({
             accentColor: "#f5f5f5",

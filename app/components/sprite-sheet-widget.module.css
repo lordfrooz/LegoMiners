@@ -1,0 +1,329 @@
+.page {
+  --lab-bg: #050b14;
+  --lab-panel: rgba(7, 18, 31, 0.8);
+  --lab-panel-soft: rgba(10, 26, 43, 0.72);
+  --lab-line: rgba(150, 221, 255, 0.18);
+  --lab-line-strong: rgba(255, 214, 120, 0.4);
+  --lab-text: #edf7ff;
+  --lab-muted: #8eb5c8;
+  --lab-accent: #ffd16f;
+  --lab-mint: #8ff6a6;
+  min-height: 100vh;
+  padding: 48px 24px 72px;
+  color: var(--lab-text);
+  background:
+    radial-gradient(circle at top left, rgba(255, 209, 111, 0.15), transparent 26%),
+    radial-gradient(circle at 84% 12%, rgba(143, 246, 166, 0.11), transparent 18%),
+    linear-gradient(180deg, #040911 0%, #091321 52%, #07111d 100%);
+}
+
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 5px;
+  opacity: 0.14;
+}
+
+.hero,
+.panel {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--lab-accent);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.sectionHeader h2 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.05em;
+}
+
+.hero h1 {
+  max-width: 11ch;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  line-height: 0.92;
+}
+
+.summary,
+.sectionHeader p,
+.cardHeader span {
+  color: var(--lab-muted);
+  line-height: 1.65;
+}
+
+.summary {
+  max-width: 62ch;
+  margin: 18px 0 0;
+}
+
+.panel {
+  position: relative;
+  padding: 26px;
+  margin-bottom: 22px;
+  border: 1px solid var(--lab-line);
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(11, 24, 40, 0.9) 0%, rgba(8, 17, 30, 0.84) 100%);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255, 209, 111, 0.08), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(143, 246, 166, 0.06), transparent 24%);
+}
+
+.sectionHeader {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 22px;
+}
+
+.sectionHeader h2 {
+  font-size: clamp(1.6rem, 4vw, 2.35rem);
+}
+
+.sectionHeader p {
+  max-width: 62ch;
+  margin: 8px 0 0;
+}
+
+.sectionIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--lab-line-strong);
+  border-radius: 16px;
+  background: rgba(255, 209, 111, 0.08);
+  color: var(--lab-accent);
+  font-family: var(--font-mono), monospace;
+}
+
+.compareGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.compareCard,
+.routePanel {
+  padding: 20px;
+  border: 1px solid var(--lab-line);
+  border-radius: 24px;
+  background: var(--lab-panel-soft);
+}
+
+.cardHeader {
+  display: grid;
+  gap: 4px;
+}
+
+.cardHeader strong {
+  font-size: 1.08rem;
+  letter-spacing: 0.02em;
+}
+
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 18px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--lab-line);
+  border-radius: 999px;
+  background: rgba(8, 18, 31, 0.76);
+  color: #dff5ff;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.83rem;
+}
+
+.demoStage {
+  position: relative;
+  min-height: 250px;
+  padding: 22px;
+  border: 1px dashed rgba(151, 225, 255, 0.16);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(4, 12, 21, 0.92) 0%, rgba(7, 18, 31, 0.8) 100%);
+}
+
+.viewportGuide,
+.clipWindow {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  width: 92px;
+  height: 92px;
+  border: 2px solid rgba(255, 209, 111, 0.9);
+  border-radius: 18px;
+}
+
+.viewportGuide {
+  display: grid;
+  place-items: end start;
+  padding: 10px;
+  background: rgba(255, 209, 111, 0.05);
+  color: #ffe8ae;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+
+.clipWindow {
+  overflow: hidden;
+  background: rgba(255, 209, 111, 0.04);
+}
+
+.sheetImage {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  display: block;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.routePanel {
+  position: relative;
+  z-index: 1;
+}
+
+.routeCanvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--lab-line);
+  border-radius: 24px;
+  background: var(--lab-bg);
+  image-rendering: pixelated;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-1px);
+}
+
+.primaryButton {
+  border: 1px solid rgba(255, 209, 111, 0.42);
+  background: linear-gradient(180deg, rgba(255, 209, 111, 0.96), rgba(255, 181, 86, 0.92));
+  color: #102031;
+  font-weight: 700;
+}
+
+.secondaryButton {
+  border: 1px solid var(--lab-line);
+  background: rgba(8, 18, 31, 0.76);
+  color: var(--lab-text);
+}
+
+.statusLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 18px 0 0;
+  color: #dff5ff;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
+}
+
+.statusLine strong {
+  color: var(--lab-mint);
+  text-transform: uppercase;
+}
+
+@media (max-width: 840px) {
+  .page {
+    padding: 32px 16px 48px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .compareGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .demoStage {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero h1 {
+    max-width: 9ch;
+  }
+
+  .sectionHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionIndex {
+    width: 44px;
+    height: 44px;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    flex: 1 1 140px;
+  }
+}
