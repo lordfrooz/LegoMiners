@@ -8,6 +8,7 @@ import {
 } from "../../../lib/tempo-server";
 
 const COLLECT_COOLDOWN_MS = 24 * 60 * 60 * 1000;
+const WITHDRAWALS_ENABLED = false;
 
 export async function POST() {
   try {
@@ -24,12 +25,19 @@ export async function POST() {
       return NextResponse.json({ error: "No active package found for this wallet." }, { status: 404 });
     }
 
+    if (!WITHDRAWALS_ENABLED) {
+      return NextResponse.json(
+        { error: "Supply has not been created yet. It will be created soon. Follow updates on X." },
+        { status: 403 },
+      );
+    }
+
     hydratePlayerPackageSnapshot(player);
 
     const now = Date.now();
     if (now - player.lastCollectedAt < COLLECT_COOLDOWN_MS) {
       return NextResponse.json(
-        { error: "Gunde 1 kere cekim yapabilirsiniz. 24 saati bekleyin." },
+        { error: "You can withdraw once per day. Please wait 24 hours." },
         { status: 429 },
       );
     }

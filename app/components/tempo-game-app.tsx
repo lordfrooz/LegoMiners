@@ -24,7 +24,8 @@ import { buildTempoAgentSpriteAssets } from "../lib/tempo-agent-sprite";
 import { useTempoGameState } from "../lib/tempo-game-state";
 import { TempoStageWorker } from "./tempo-stage-worker";
 
-const LIVE_ACCESS_LOCK = process.env.NEXT_PUBLIC_APP_ENV === "live";
+const EARLY_ACCESS_IS_OPEN = process.env.NEXT_PUBLIC_EARLY_ACCESS_OPEN !== "false";
+const LIVE_ACCESS_LOCK = process.env.NEXT_PUBLIC_APP_ENV === "live" && !EARLY_ACCESS_IS_OPEN;
 const WHITELIST_X_ACCOUNT = process.env.NEXT_PUBLIC_WHITELIST_X_ACCOUNT as string;
 const WHITELIST_TWEET_ID = process.env.NEXT_PUBLIC_WHITELIST_TWEET_ID as string;
 const WHITELIST_SHARE_TEXT = `Joining Tempo Topia Early Access on @${WHITELIST_X_ACCOUNT}. Built on Tempo for early supporters.`;
@@ -77,6 +78,7 @@ const packImageById = {
 const PATHUSD_ICON_URL =
   "https://esm.sh/gh/tempoxyz/tempo-apps/apps/tokenlist/data/4217/icons/0x20c0000000000000000000000000000000000000.svg";
 const GAME_PRESENCE_STORAGE_PREFIX = "tempo_game_presence:";
+const WITHDRAWALS_ENABLED = false;
 
 const gameNavItems = [
   { id: "shop", symbol: "S", label: "Shop" },
@@ -331,6 +333,7 @@ export function TempoGameApp() {
     getTrustedNow,
     unclaimedIncome,
     pathUsdBalance,
+    usdcBalance,
     moveAgentPosition,
   } = useTempoGameState();
   const [twitterHandle, setTwitterHandle] = useState("");
@@ -606,6 +609,7 @@ export function TempoGameApp() {
   });
   const displayName = normalizedTwitterHandle || "Topia";
   const displayedPathUsdBalance = pathUsdBalance;
+  const displayedUsdcBalance = usdcBalance;
   const displayedTopiaEarned = formatTopiaAmount((player?.lifetimeCollected ?? 0) + unclaimedIncome);
   const displayedUnclaimedIncome = formatTopiaAmount(unclaimedIncome);
   const displayedIncomePerMinute = formatIncomePerMinute(totalIncomePerMinute);
@@ -1546,6 +1550,13 @@ export function TempoGameApp() {
                         </div>
                       </div>
                       <div className="game-hud-mini-stat">
+                        <span className="game-hud-coin game-hud-coin-usdc">U</span>
+                        <div>
+                          <small>USDC Balance</small>
+                          <em>{displayedUsdcBalance}</em>
+                        </div>
+                      </div>
+                      <div className="game-hud-mini-stat">
                         <span className="game-hud-coin game-hud-coin-topia">T</span>
                         <div>
                           <small>$TOPIA Earned</small>
@@ -1783,8 +1794,14 @@ export function TempoGameApp() {
                           </div>
                         </div>
                         <div className="game-hud-withdraw-actions">
-                          <button className="action-button game-hud-withdraw-button" onClick={collectIncome} type="button">
-                            Collect $TOPIA
+                          <button
+                            className="action-button game-hud-withdraw-button"
+                            disabled={!WITHDRAWALS_ENABLED}
+                            onClick={collectIncome}
+                            title="Supply has not been created yet. It will be created soon. Follow updates on X."
+                            type="button"
+                          >
+                            Withdraw $TOPIA
                           </button>
                           <button className="ghost-button game-hud-inline-button" onClick={logout} type="button">
                             Disconnect
@@ -1818,8 +1835,14 @@ export function TempoGameApp() {
                     <strong>{nextAgentSlots}</strong>
                   </div>
                   <div className="game-action-stack">
-                    <button className="action-button game-action-primary" onClick={collectIncome} type="button">
-                      Collect Income
+                    <button
+                      className="action-button game-action-primary"
+                      disabled={!WITHDRAWALS_ENABLED}
+                      onClick={collectIncome}
+                      title="Supply has not been created yet. It will be created soon. Follow updates on X."
+                      type="button"
+                    >
+                      Withdraw $TOPIA
                     </button>
                     <button className="ghost-button game-action-secondary" onClick={resetProgress} type="button">
                       Reset Progress

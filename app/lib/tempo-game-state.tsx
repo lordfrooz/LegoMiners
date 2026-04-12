@@ -67,6 +67,7 @@ type TempoGameContextValue = {
   getTrustedNow: () => number;
   nextAgentSlots: number;
   pathUsdBalance: string;
+  usdcBalance: string;
   lastPurchaseTxHash: string | null;
   pendingPurchaseTxHash: string | null;
   purchaseSuccessNonce: number;
@@ -218,6 +219,7 @@ export function TempoGameStateProvider({
   const [marketPurchaseSuccessNonce, setMarketPurchaseSuccessNonce] = useState(0);
   const [lastMarketPurchase, setLastMarketPurchase] = useState<MarketPurchaseInput | null>(null);
   const [pathUsdBalance, setPathUsdBalance] = useState("0.00");
+  const [usdcBalance, setUsdcBalance] = useState("0.00");
   const [clock, setClock] = useState(() => Date.now());
   const autoAuthAttemptRef = useRef<string | null>(null);
   const pendingFinalizeAttemptRef = useRef(false);
@@ -279,28 +281,32 @@ export function TempoGameStateProvider({
     }
   }
 
-  async function refreshPathUsdBalance(targetAddress?: string) {
+  async function readPaymentTokenBalance(paymentToken: PaymentToken, targetAddress: string) {
+    const tokenAddress = getPaymentTokenAddress(paymentToken);
+    const balance = await publicClient!.readContract({
+      address: tokenAddress,
+      abi: erc20TransferAbi,
+      functionName: "balanceOf",
+      args: [normalizeAddress(targetAddress)],
+    });
+
+    return Number(formatUnits(balance, PAYMENT_TOKEN_DECIMALS)).toFixed(2);
+  }
+
+  async function refreshPaymentTokenBalances(targetAddress?: string) {
     if (!publicClient || !targetAddress) {
       setPathUsdBalance("0.00");
+      setUsdcBalance("0.00");
       return;
     }
 
-    try {
-      const tokenAddress = readAddressConfig(
-        process.env.NEXT_PUBLIC_PATHUSD_ADDRESS,
-        DEFAULT_PATHUSD_ADDRESS,
-      );
-      const balance = await publicClient.readContract({
-        address: tokenAddress,
-        abi: erc20TransferAbi,
-        functionName: "balanceOf",
-        args: [normalizeAddress(targetAddress)],
-      });
+    const [pathUsdResult, usdcResult] = await Promise.allSettled([
+      readPaymentTokenBalance("pathusd", targetAddress),
+      readPaymentTokenBalance("usdc", targetAddress),
+    ]);
 
-      setPathUsdBalance(Number(formatUnits(balance, PAYMENT_TOKEN_DECIMALS)).toFixed(2));
-    } catch {
-      setPathUsdBalance("0.00");
-    }
+    setPathUsdBalance(pathUsdResult.status === "fulfilled" ? pathUsdResult.value : "0.00");
+    setUsdcBalance(usdcResult.status === "fulfilled" ? usdcResult.value : "0.00");
   }
 
   async function syncSession() {
@@ -340,7 +346,7 @@ export function TempoGameStateProvider({
       setIsAuthenticated(true);
       setSessionAddress(walletAddress);
       await loadGameState();
-      await refreshPathUsdBalance(walletAddress);
+      await refreshPaymentTokenBalances(walletAddress);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Failed to restore session.";
       setAuthError(message);
@@ -348,6 +354,7 @@ export function TempoGameStateProvider({
       setSessionAddress(null);
       setPlayer(null);
       setPathUsdBalance("0.00");
+      setUsdcBalance("0.00");
     } finally {
       setIsReady(true);
     }
@@ -360,13 +367,14 @@ export function TempoGameStateProvider({
   useEffect(() => {
     if (!isConnected || !address) {
       setPathUsdBalance("0.00");
+      setUsdcBalance("0.00");
       return;
     }
 
-    void refreshPathUsdBalance(address);
+    void refreshPaymentTokenBalances(address);
 
     const timer = window.setInterval(() => {
-      void refreshPathUsdBalance(address);
+      void refreshPaymentTokenBalances(address);
     }, 15000);
 
     return () => {
@@ -507,6 +515,7 @@ export function TempoGameStateProvider({
       setSessionAddress(null);
       setPlayer(null);
       setPathUsdBalance("0.00");
+      setUsdcBalance("0.00");
     } finally {
       setIsAuthenticating(false);
     }
@@ -525,6 +534,7 @@ export function TempoGameStateProvider({
       setPendingPurchase(null);
       setLastPurchaseTxHash(null);
       setPathUsdBalance("0.00");
+      setUsdcBalance("0.00");
       autoAuthAttemptRef.current = null;
     }
   }
@@ -549,7 +559,7 @@ export function TempoGameStateProvider({
           await loadGameState();
           setPendingPurchase(null);
           setPurchaseSuccessNonce(Date.now());
-          await refreshPathUsdBalance(address);
+          await refreshPaymentTokenBalances(address);
           return;
         }
 
@@ -560,7 +570,7 @@ export function TempoGameStateProvider({
         setLastPurchaseTxHash(data.player?.purchaseTxHash ?? txHash);
         setPendingPurchase(null);
         setPurchaseSuccessNonce(Date.now());
-        await refreshPathUsdBalance(address);
+        await refreshPaymentTokenBalances(address);
         return;
       } catch (error) {
         const nextError = error instanceof Error ? error : new Error("Failed to finalize package purchase.");
@@ -778,7 +788,7 @@ export function TempoGameStateProvider({
       setPlayer(data.player);
       setLastMarketPurchase(input);
       setMarketPurchaseSuccessNonce(Date.now());
-      await refreshPathUsdBalance(address);
+      await refreshPaymentTokenBalances(address);
     } catch (error) {
       const message = formatWalletError(error, "Market purchase failed.", {
         paymentToken: input.paymentToken,
@@ -804,7 +814,7 @@ export function TempoGameStateProvider({
       const data = await readJsonResponse(response);
       syncServerClock(data.serverNow);
       setPlayer(data.player);
-      await refreshPathUsdBalance(address);
+      await refreshPaymentTokenBalances(address);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Failed to collect income.";
       setPurchaseError(message);
@@ -840,7 +850,7 @@ export function TempoGameStateProvider({
     setPlayer(null);
     setLastPurchaseTxHash(null);
     setPendingPurchase(null);
-    await refreshPathUsdBalance(address);
+    await refreshPaymentTokenBalances(address);
   }
 
   useEffect(() => {
@@ -877,6 +887,7 @@ export function TempoGameStateProvider({
         getTrustedNow: getMonotonicNow,
         nextAgentSlots,
         pathUsdBalance,
+        usdcBalance,
         lastPurchaseTxHash,
         pendingPurchaseTxHash: pendingPurchase?.txHash ?? null,
         purchaseSuccessNonce,

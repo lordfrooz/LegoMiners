@@ -88,7 +88,9 @@ export function TempoStageWorker({
   const animationFrameRef = useRef<number | null>(null);
   const lastTimestampRef = useRef<number | null>(null);
   const actorRef = useRef<WorkerActorState>(createInitialActorState());
+  const previousWorkRef = useRef<StagePoint | null>(null);
   const [workingFrames, setWorkingFrames] = useState<string[]>([]);
+  const [isRelocating, setIsRelocating] = useState(false);
   const initialWorkingFrameSrc = workingFrames[0] ?? null;
 
   useEffect(() => {
@@ -259,10 +261,36 @@ export function TempoStageWorker({
     workingPulseIntervalMs,
   ]);
 
+  useEffect(() => {
+    const previousWork = previousWorkRef.current;
+    previousWorkRef.current = work;
+
+    if (
+      !previousWork ||
+      (previousWork.x === work.x && previousWork.y === work.y && previousWork.scale === work.scale)
+    ) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    setIsRelocating(true);
+    const timeoutId = window.setTimeout(() => {
+      setIsRelocating(false);
+    }, 760);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [work.scale, work.x, work.y]);
+
   return (
     <div
       aria-label={`${agentLabel} working`}
-      className={`game-stage-worker game-stage-worker-${agentType}${isSelected ? " game-stage-worker-selected" : ""}${isMoveArmed ? " game-stage-worker-move-armed" : ""}`}
+      className={`game-stage-worker game-stage-worker-${agentType}${isSelected ? " game-stage-worker-selected" : ""}${isMoveArmed ? " game-stage-worker-move-armed" : ""}${isRelocating ? " game-stage-worker-relocating" : ""}`}
       onClick={(event) => {
         event.stopPropagation();
         onSelect?.();
