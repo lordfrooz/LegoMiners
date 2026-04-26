@@ -7,9 +7,9 @@ const tempoExplorerUrl = process.env.NEXT_PUBLIC_TEMPO_EXPLORER_URL ?? "https://
 
 export const tempoMainnet = defineChain({
   id: tempoChainId,
-  name: "Tempo Mainnet",
+  name: "Base Mainnet",
   nativeCurrency: {
-    name: "Tempo USD",
+    name: "Base USD",
     symbol: "USD",
     decimals: 18,
   },
@@ -25,7 +25,7 @@ export const tempoMainnet = defineChain({
   },
   blockExplorers: {
     default: {
-      name: "Tempo Explorer",
+      name: "Base Explorer",
       url: tempoExplorerUrl,
     },
   },

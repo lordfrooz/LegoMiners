@@ -28,8 +28,8 @@ const EARLY_ACCESS_IS_OPEN = process.env.NEXT_PUBLIC_EARLY_ACCESS_OPEN !== "fals
 const LIVE_ACCESS_LOCK = process.env.NEXT_PUBLIC_APP_ENV === "live" && !EARLY_ACCESS_IS_OPEN;
 const WHITELIST_X_ACCOUNT = process.env.NEXT_PUBLIC_WHITELIST_X_ACCOUNT as string;
 const WHITELIST_TWEET_ID = process.env.NEXT_PUBLIC_WHITELIST_TWEET_ID as string;
-const WHITELIST_SHARE_TEXT = `Joining Tempo Topia Early Access on @${WHITELIST_X_ACCOUNT}. Built on Tempo for early supporters.`;
-const WHITELIST_SHARE_URL = "https://tempotopia.xyz";
+const WHITELIST_SHARE_TEXT = `Joining Lego Miners Early Access on @${WHITELIST_X_ACCOUNT}. Built on Base for early supporters.`;
+const WHITELIST_SHARE_URL = "https://legominers.xyz";
 
 const whitelistTasks = [
   {
@@ -128,6 +128,16 @@ type LiveAccessResult = {
   tone: "closed" | "error" | "secured";
 };
 
+type LeaderboardEntry = {
+  rank: number;
+  walletAddress: string;
+  label: string;
+  incomePerMinute: number;
+  isPlaceholder?: boolean;
+};
+
+const LEADERBOARD_SLOT_COUNT = 10;
+
 function formatTopiaAmount(value: number) {
   const absValue = Math.abs(value);
 
@@ -148,6 +158,26 @@ function formatTopiaAmount(value: number) {
 
 function formatIncomePerMinute(value: number) {
   return value.toFixed(6);
+}
+
+function buildLeaderboardDisplayEntries(entries: LeaderboardEntry[]) {
+  return Array.from({ length: LEADERBOARD_SLOT_COUNT }, (_, index) => {
+    const entry = entries[index];
+
+    if (entry) {
+      return entry;
+    }
+
+    const rank = index + 1;
+
+    return {
+      rank,
+      walletAddress: `placeholder-${rank}`,
+      label: "Awaiting miner",
+      incomePerMinute: 0,
+      isPlaceholder: true,
+    };
+  });
 }
 
 const officeStageByTier: Record<
@@ -249,7 +279,7 @@ const agentWorkMessagesByType: Record<AgentType, string[]> = {
     "Gathered Topia resources and generated $TOPIA.",
     "Cleared an operations queue and lifted passive income.",
     "Maintained a Topia station and earned $TOPIA.",
-    "Opened a new route and improved production tempo.",
+    "Opened a new route and improved production base.",
     "Closed a field report and added $TOPIA to the balance.",
     "Optimized equipment and produced extra $TOPIA.",
     "Stabilized the energy line and protected the income flow.",
@@ -257,7 +287,7 @@ const agentWorkMessagesByType: Record<AgentType, string[]> = {
     "Prepared a new resource batch at the work table.",
     "Found an efficiency bonus in the Topia depot.",
     "Solved a support ticket and claimed a $TOPIA reward.",
-    "Strengthened the tempo chain from the work desk.",
+    "Strengthened the Base chain from the work desk.",
     "Prepared the operations floor for new agents.",
     "Turned a maintenance run into $TOPIA.",
     "Kept contributing to the Topia ecosystem.",
@@ -277,7 +307,7 @@ const agentWorkMessagesByType: Record<AgentType, string[]> = {
     "Found a new opportunity in the chart scan.",
     "Used a volume spike to support passive income.",
     "Watched X trends and closed a trade report.",
-    "Queued orders on the Tempo market.",
+    "Queued orders on the Base market.",
     "Caught an arbitrage window and earned $TOPIA.",
     "Followed the market rhythm and brought income back.",
     "Closed a clean session at the trade desk.",
@@ -363,14 +393,13 @@ export function TempoGameApp() {
     Record<string, { message: string; nonce: number }>
   >({});
   const [awaySummary, setAwaySummary] = useState<AwaySummary | null>(null);
-  const [leaderboardEntries, setLeaderboardEntries] = useState<
-    Array<{ rank: number; walletAddress: string; label: string; incomePerMinute: number }>
-  >([]);
+  const [leaderboardEntries, setLeaderboardEntries] = useState<LeaderboardEntry[]>([]);
   const workspaceRef = useRef<HTMLDivElement | null>(null);
   const turnstileRef = useRef<any>(null);
   const lastAwaySummaryRef = useRef<string | null>(null);
   const lastAgentMessageRef = useRef<Record<string, string>>({});
   const awaySummaryTimerRef = useRef<number | null>(null);
+  const leaderboardDisplayEntries = buildLeaderboardDisplayEntries(leaderboardEntries);
 
   useEffect(() => {
     setIsClient(true);
@@ -1126,7 +1155,7 @@ export function TempoGameApp() {
             <div className={`wallet-gate-minimal whitelist-gate whitelist-gate-${whitelistStep}`}>
               <div className="wallet-gate-intro whitelist-gate-intro">
                 <h2>
-                  Join the <span className="brand-accent">Tempo Topia</span>
+                  Join the <span className="brand-accent">Lego Miners</span>
                 </h2>
                 <p>
                   Complete the X tasks, drop your handle and EVM wallet address, then unlock
@@ -1289,7 +1318,7 @@ export function TempoGameApp() {
                     <Link className="ghost-button live-access-docs-link" href="/docs">
                       Open Docs
                     </Link>
-                    <a className="ghost-button live-access-docs-link" href="https://x.com/TempoTopia" rel="noreferrer" target="_blank">
+                    <a className="ghost-button live-access-docs-link" href="https://x.com/LegoMiners" rel="noreferrer" target="_blank">
                       X / Updates
                     </a>
                   </div>
@@ -1306,7 +1335,7 @@ export function TempoGameApp() {
                 <div className="connect-wallet-zoom-lock" style={connectWalletStyle}>
                   <h2>Link your wallet to start the game</h2>
                   <p>
-                    Connect an EVM wallet on Tempo Mainnet. Your game progress stays tied to
+                    Connect an EVM wallet on Base Mainnet. Your game progress stays tied to
                     the wallet you use here.
                   </p>
 
@@ -1402,7 +1431,7 @@ export function TempoGameApp() {
               <div className="shop-shell-head">
                 <p className="meta-label">Wallet Authenticated</p>
                 <h2 className="shop-title">Choose Your Pack</h2>
-                <p className="shop-subtitle">Choose PathUSD or USDC, confirm on Tempo, then unlock the game.</p>
+                <p className="shop-subtitle">Choose PathUSD or USDC, confirm on Base, then unlock the game.</p>
               </div>
 
               <div className="shop-package-grid">
@@ -1538,7 +1567,7 @@ export function TempoGameApp() {
                   <div className="game-stage-aura game-stage-aura-right" />
                   <div className="game-hud-profile">
                     <div className="game-hud-profile-logo-box" aria-hidden="true">
-                      <img alt="" className="game-hud-profile-logo" src="/logo.jpg" />
+                      <img alt="" className="game-hud-profile-logo" src="/legominers.jpg" />
                     </div>
                     <div className="game-hud-profile-copy">
                       <strong>{displayName}</strong>
@@ -1653,7 +1682,9 @@ export function TempoGameApp() {
                     </div>
                   </div>
                   {activeGameTab ? (
-                  <aside className={`game-hud-panel ${activeGameTab === "shop" ? "game-hud-panel-shop" : ""}`.trim()}>
+                  <aside
+                    className={`game-hud-panel ${activeGameTab === "shop" ? "game-hud-panel-shop" : ""} ${activeGameTab === "leaderboard" ? "game-hud-panel-leaderboard" : ""}`.trim()}
+                  >
                     {activeGameTab === "shop" ? (
                       <>
                         <div className="game-hud-panel-head">
@@ -1754,22 +1785,37 @@ export function TempoGameApp() {
 
                     {activeGameTab === "leaderboard" ? (
                       <>
-                        <div className="game-hud-panel-head">
+                        <div className="game-hud-panel-head game-hud-panel-head-leaderboard">
                           <span className="meta-label">Ranking</span>
-                          <strong>Leaderboard</strong>
+                          <div className="game-hud-panel-head-title-row">
+                            <strong>Leaderboard</strong>
+                            <Image
+                              alt=""
+                              aria-hidden="true"
+                              className="game-hud-leaderboard-badge"
+                              height={88}
+                              src="/kelahmad.png"
+                              width={88}
+                            />
+                          </div>
                           <p>Ranking is based on minute income. Highest income sits at rank one.</p>
                         </div>
                         <div className="game-hud-leaderboard">
-                          {leaderboardEntries.map((entry) => (
-                            <div
-                              className={`game-hud-leaderboard-row ${entry.rank <= 5 ? "game-hud-leaderboard-row-top" : ""} ${entry.walletAddress.toLowerCase() === address?.toLowerCase() ? "game-hud-leaderboard-row-self" : ""}`.trim()}
-                              key={`${entry.walletAddress}-${entry.rank}`}
-                            >
-                              <span>#{entry.rank}</span>
-                              <strong>{entry.walletAddress.toLowerCase() === address?.toLowerCase() ? displayName : entry.label}</strong>
-                              <em>{formatIncomePerMinute(entry.incomePerMinute)} / min</em>
-                            </div>
-                          ))}
+                          {leaderboardDisplayEntries.map((entry) => {
+                            const isCurrentPlayer =
+                              !entry.isPlaceholder && entry.walletAddress.toLowerCase() === address?.toLowerCase();
+
+                            return (
+                              <div
+                                className={`game-hud-leaderboard-row ${entry.rank <= 5 ? "game-hud-leaderboard-row-top" : ""} ${isCurrentPlayer ? "game-hud-leaderboard-row-self" : ""} ${entry.isPlaceholder ? "game-hud-leaderboard-row-placeholder" : ""}`.trim()}
+                                key={`${entry.walletAddress}-${entry.rank}`}
+                              >
+                                <span>#{entry.rank}</span>
+                                <strong>{isCurrentPlayer ? displayName : entry.label}</strong>
+                                <em>{entry.isPlaceholder ? "Awaiting score" : `${formatIncomePerMinute(entry.incomePerMinute)} / min`}</em>
+                              </div>
+                            );
+                          })}
                         </div>
                       </>
                     ) : null}
@@ -1812,7 +1858,7 @@ export function TempoGameApp() {
                   </aside>
                   ) : null}
                   <div className="game-stage-floor" />
-                  <div aria-label="Tempo Topia home scene" className="game-stage-home-scene" style={tableStyle} />
+                  <div aria-label="Lego Miners home scene" className="game-stage-home-scene" style={tableStyle} />
                 </div>
               </div>
 

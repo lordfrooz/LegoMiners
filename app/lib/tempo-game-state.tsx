@@ -147,7 +147,7 @@ function formatWalletError(
   }
 
   if (message.includes("not enough native gas token balance")) {
-    return "Not enough Tempo gas balance for this transaction.";
+    return "Not enough Base gas balance for this transaction.";
   }
 
   if (
@@ -664,7 +664,7 @@ export function TempoGameStateProvider({
       ]);
 
       if (nativeBalance < gasEstimate * gasPrice) {
-        throw new Error("Not enough native gas token balance on Tempo Mainnet.");
+        throw new Error("Not enough native gas token balance on Base Mainnet.");
       }
 
       const txHash = await walletClient.writeContract({
@@ -754,7 +754,7 @@ export function TempoGameStateProvider({
       ]);
 
       if (nativeBalance < gasEstimate * gasPrice) {
-        throw new Error("Not enough native gas token balance on Tempo Mainnet.");
+        throw new Error("Not enough native gas token balance on Base Mainnet.");
       }
 
       const txHash = await walletClient.writeContract({

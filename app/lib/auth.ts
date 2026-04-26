@@ -40,14 +40,14 @@ export function hashSessionToken(token: string) {
 
 export function createAuthMessage(address: string, nonce: string) {
   return [
-    "Tempo Topia authentication",
+    "Lego Miners authentication",
     "",
     `Wallet: ${normalizeAddress(address)}`,
     `Nonce: ${nonce}`,
     `Chain ID: 4217`,
     `Issued At: ${new Date().toISOString()}`,
     "",
-    "Sign this message to authenticate and unlock your Tempo Topia session.",
+    "Sign this message to authenticate and unlock your Lego Miners session.",
   ].join("\n");
 }
 

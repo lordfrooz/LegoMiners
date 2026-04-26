@@ -1,4 +1,4 @@
-# TempoClaw Landing Page Clone Design
+# BaseClaw Landing Page Clone Design
 
 Date: 2026-04-22
 Status: Approved for planning
@@ -6,7 +6,7 @@ Scope: Landing page only. No gameplay, API, or application-logic changes are par
 
 ## Goal
 
-Recreate the provided reference landing page as closely as possible for TempoClaw.
+Recreate the provided reference landing page as closely as possible for BaseClaw.
 
 Non-negotiable rule:
 - The page should be a near 1:1 clone of the reference composition, hierarchy, spacing, panel structure, CTA layout, stats bar, feature cards, footer strip, glow language, and overall visual density.
@@ -56,7 +56,7 @@ The header should match the reference composition:
 
 - Left: brand/logo area
 - Center: horizontal navigation
-- Right: "Built on Solana" style pill, two circular social buttons, one gradient wallet button
+- Right: "Built on Base" style pill, two circular social buttons, one gradient wallet button
 
 Header rules:
 - Do not collapse the header into a minimal nav
@@ -231,7 +231,7 @@ Because the user explicitly requested a direct clone, implementation should foll
 - Match the glow intensity and visual richness closely
 
 Allowed adaptation:
-- TempoClaw branding/content can replace the reference text
+- BaseClaw branding/content can replace the reference text
 - `public/landing.png` replaces the background photo
 - Minor responsive adjustments are allowed where required by viewport size
 

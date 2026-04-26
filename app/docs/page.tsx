@@ -8,8 +8,8 @@ import {
 import styles from "./wiki.module.css";
 
 export const metadata: Metadata = {
-  title: "TempoTopia Docs",
-  description: "TempoTopia wiki, onboarding guide, economy reference, roadmap and gameplay manual.",
+  title: "Lego Miners Docs",
+  description: "Lego Miners wiki, onboarding guide, economy reference, roadmap and gameplay manual.",
 };
 
 const sectionLinks = [
@@ -33,8 +33,8 @@ const sectionLinks = [
 ];
 
 const overviewBullets = [
-  "TempoTopia is a wallet-based passive strategy game built around pack ownership, office progression and agent output.",
-  "Players enter by buying a pack on Tempo Mainnet with PathUSD or USDC.e.",
+  "Lego Miners is a wallet-based passive strategy game built around pack ownership, office progression and agent output.",
+  "Players enter by buying a pack on Base Mainnet with PathUSD or USDC.e.",
   "Every pack unlocks a starter agent, a visual office tier and a minute-based $TOPIA income profile.",
   "From there, the main loop is simple: collect, expand, optimize and climb minute and daily output.",
 ];
@@ -42,11 +42,11 @@ const overviewBullets = [
 const quickStartSteps = [
   {
     title: "Connect your wallet",
-    body: "Use the wallet connect entry point and make sure you are on Tempo Mainnet before trying to buy anything.",
+    body: "Use the wallet connect entry point and make sure you are on Base Mainnet before trying to buy anything.",
   },
   {
     title: "Sign the login message",
-    body: "TempoTopia uses a wallet signature for session auth. This is not a payment and it does not move funds.",
+    body: "Lego Miners uses a wallet signature for session auth. This is not a payment and it does not move funds.",
   },
   {
     title: "Choose a pack",
@@ -58,7 +58,7 @@ const quickStartSteps = [
   },
   {
     title: "Wait for finalize",
-    body: "Once the transfer confirms on-chain, TempoTopia finalizes the purchase and unlocks the game state for your wallet.",
+    body: "Once the transfer confirms on-chain, Lego Miners finalizes the purchase and unlocks the game state for your wallet.",
   },
   {
     title: "Start compounding",
@@ -74,11 +74,11 @@ const walletNotes = [
 ];
 
 const paymentFlow = [
-  "Connect wallet and sign the TempoTopia session message.",
+  "Connect wallet and sign the Lego Miners session message.",
   "Select a pack and choose PathUSD or USDC.e as the payment token.",
-  "Approve the transfer in your wallet on Tempo Mainnet.",
+  "Approve the transfer in your wallet on Base Mainnet.",
   "Wait for the transfer receipt to confirm on-chain.",
-  "TempoTopia verifies the transfer, matches token, sender, receiver and amount, then unlocks the pack.",
+  "Lego Miners verifies the transfer, matches token, sender, receiver and amount, then unlocks the pack.",
   "If the UI briefly shows pending finalize, do not repay. The app retries finalize automatically.",
 ];
 
@@ -89,15 +89,15 @@ const paymentTroubleshooting = [
   },
   {
     title: "Insufficient gas",
-    body: "Token balance and gas balance are separate. Even with enough PathUSD or USDC.e, the wallet still needs Tempo gas for the transfer transaction.",
+    body: "Token balance and gas balance are separate. Even with enough PathUSD or USDC.e, the wallet still needs Base gas for the transfer transaction.",
   },
   {
     title: "Transaction confirmed but still pending",
-    body: "This usually means receipt indexing and purchase finalization are slightly out of sync. TempoTopia retries finalize and can resume the purchase state.",
+    body: "This usually means receipt indexing and purchase finalization are slightly out of sync. Lego Miners retries finalize and can resume the purchase state.",
   },
   {
     title: "Wrong network",
-    body: "Pack and shop purchases only work on Tempo Mainnet. The client attempts to switch automatically, but the wallet must accept the network change.",
+    body: "Pack and shop purchases only work on Base Mainnet. The client attempts to switch automatically, but the wallet must accept the network change.",
   },
 ];
 
@@ -108,7 +108,7 @@ const gameplayCards = [
   },
   {
     title: "Minute-based earnings",
-    body: "TempoTopia deliberately uses full-minute accrual instead of fake second-level inflation. Rewards update on a cleaner, easier-to-explain cadence.",
+    body: "Lego Miners deliberately uses full-minute accrual instead of fake second-level inflation. Rewards update on a cleaner, easier-to-explain cadence.",
   },
   {
     title: "Progression",
@@ -170,7 +170,7 @@ const shopCards = [
   },
   {
     title: "Payment choice",
-    body: "Shop purchases follow the same token flow as packs: select PathUSD or USDC.e, confirm on Tempo, then let the app finalize the result.",
+    body: "Shop purchases follow the same token flow as packs: select PathUSD or USDC.e, confirm on Base, then let the app finalize the result.",
   },
 ];
 
@@ -184,7 +184,7 @@ const economyRules = [
 const seasonCards = [
   {
     title: "Season-based structure",
-    body: "TempoTopia is planned to run in sequential seasons. The product does not treat every phase as permanently open at once.",
+    body: "Lego Miners is planned to run in sequential seasons. The product does not treat every phase as permanently open at once.",
   },
   {
     title: "Season completion flow",
@@ -238,8 +238,8 @@ const goalItems = [
 
 const faqItems = [
   {
-    q: "What is TempoTopia?",
-    a: "TempoTopia is a passive strategy game where pack ownership unlocks agents and offices that produce $TOPIA on a minute-based cadence.",
+    q: "What is Lego Miners?",
+    a: "Lego Miners is a passive strategy game where pack ownership unlocks agents and offices that produce $TOPIA on a minute-based cadence.",
   },
   {
     q: "How do I enter the game?",
@@ -247,7 +247,7 @@ const faqItems = [
   },
   {
     q: "How is payment made?",
-    a: "Payments are ERC-20 transfers on Tempo Mainnet using PathUSD or USDC.e. Gas is separate from the pack price.",
+    a: "Payments are ERC-20 transfers on Base Mainnet using PathUSD or USDC.e. Gas is separate from the pack price.",
   },
   {
     q: "How often can I withdraw?",
@@ -255,7 +255,7 @@ const faqItems = [
   },
   {
     q: "Is $TOPIA live already?",
-    a: "$TOPIA is not live yet. It is currently used as the internal gameplay unit for economy balancing and UI communication inside TempoTopia.",
+    a: "$TOPIA is not live yet. It is currently used as the internal gameplay unit for economy balancing and UI communication inside Lego Miners.",
   },
   {
     q: "What price is $TOPIA expected to launch at?",
@@ -267,7 +267,7 @@ const faqItems = [
   },
   {
     q: "Why does the game not use per-second income?",
-    a: "Per-second output looks flashy but often bloats the UI and creates fake precision. TempoTopia uses full-minute accrual to keep the system cleaner.",
+    a: "Per-second output looks flashy but often bloats the UI and creates fake precision. Lego Miners uses full-minute accrual to keep the system cleaner.",
   },
   {
     q: "How is $TOPIA balanced right now?",
@@ -320,10 +320,10 @@ export default function DocsPage() {
       <div className={styles.shell}>
         <header className={styles.hero}>
           <div className={styles.heroCopy}>
-            <span className={styles.eyebrow}>TempoTopia Docs</span>
+            <span className={styles.eyebrow}>Lego Miners Docs</span>
             <h1>A full wiki for players, buyers and future holders.</h1>
             <p>
-              This page is the single source of truth for how TempoTopia works today:
+              This page is the single source of truth for how Lego Miners works today:
               onboarding, wallet flow, payments, pack economics, earning logic, roadmap and
               open items that still need project-specific copy.
             </p>
@@ -387,7 +387,7 @@ export default function DocsPage() {
                 <h2>Welcome</h2>
               </div>
               <p className={styles.lead}>
-                TempoTopia is a passive strategy game on Tempo Mainnet. You buy a pack,
+                Lego Miners is a passive strategy game on Base Mainnet. You buy a pack,
                 unlock an office, receive a starter agent and grow a minute-based production
                 engine around <strong>$TOPIA</strong>.
               </p>
@@ -413,8 +413,8 @@ export default function DocsPage() {
                   <strong>Website</strong>
                   <p>Main site and game entry.</p>
                   <div className={styles.heroLinks}>
-                    <a href="https://tempotopia.xyz" rel="noreferrer" target="_blank">
-                      tempotopia.xyz
+                    <a href="https://legominers.xyz" rel="noreferrer" target="_blank">
+                      legominers.xyz
                     </a>
                   </div>
                 </article>
@@ -422,8 +422,8 @@ export default function DocsPage() {
                   <strong>X</strong>
                   <p>Primary public social channel for updates and announcements.</p>
                   <div className={styles.heroLinks}>
-                    <a href="https://x.com/TempoTopia" rel="noreferrer" target="_blank">
-                      x.com/TempoTopia
+                    <a href="https://x.com/LegoMiners" rel="noreferrer" target="_blank">
+                      x.com/LegoMiners
                     </a>
                   </div>
                 </article>
@@ -474,7 +474,7 @@ export default function DocsPage() {
                 <article className={styles.infoCard}>
                   <strong>How login works</strong>
                   <p>
-                    TempoTopia uses a signed wallet message to create a secure session. This signature
+                    Lego Miners uses a signed wallet message to create a secure session. This signature
                     authenticates the wallet but does not move funds.
                   </p>
                 </article>
@@ -506,7 +506,7 @@ export default function DocsPage() {
                 <h2>Pack Tiers</h2>
               </div>
               <p className={styles.lead}>
-                Packs are the entry layer into TempoTopia. Each pack unlocks your office tier,
+                Packs are the entry layer into Lego Miners. Each pack unlocks your office tier,
                 starter agent and the baseline output curve that defines early progression.
               </p>
               <div className={styles.packGrid}>
@@ -583,7 +583,7 @@ export default function DocsPage() {
                   <ul className={styles.flatList}>
                     <li>PathUSD</li>
                     <li>USDC.e</li>
-                    <li>Tempo Mainnet only</li>
+                    <li>Base Mainnet only</li>
                     <li>Gas paid separately from purchase amount</li>
                   </ul>
                 </article>
@@ -651,7 +651,7 @@ export default function DocsPage() {
               <div className={styles.callout}>
                 <strong>Current design stance</strong>
                 <p>
-                  TempoTopia exposes economy numbers in minute and daily views because that is the
+                  Lego Miners exposes economy numbers in minute and daily views because that is the
                   clearest way to explain progression without stuffing the interface with noisy fake precision.
                 </p>
               </div>

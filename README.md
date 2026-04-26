@@ -1,6 +1,6 @@
-# Tempo Topia
+# Lego Miners
 
-Vercel-ready Next.js landing page inspired by the pacing and section flow of `tempo.xyz`, rebuilt as an original `Tempo Topia` brand experience.
+Vercel-ready Next.js landing page inspired by the pacing and section flow of `tempo.xyz`, rebuilt as an original `Lego Miners` brand experience.
 
 ## Requirements
 
