@@ -1567,7 +1567,7 @@ export function TempoGameApp() {
                   <div className="game-stage-aura game-stage-aura-right" />
                   <div className="game-hud-profile">
                     <div className="game-hud-profile-logo-box" aria-hidden="true">
-                      <img alt="" className="game-hud-profile-logo" src="/legominers.jpg" />
+                      <img alt="" className="game-hud-profile-logo" src="/legominers.jpeg" />
                     </div>
                     <div className="game-hud-profile-copy">
                       <strong>{displayName}</strong>

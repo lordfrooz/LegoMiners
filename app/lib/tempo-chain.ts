@@ -19,7 +19,7 @@ export const wagmiConfig = getDefaultConfig({
   appName: "Lego Miners",
   appDescription: "Agent-themed GameFi command center on Base.",
   appUrl: "https://legominers.xyz",
-  appIcon: "/legominers.jpg",
+  appIcon: "/legominers.jpeg",
   projectId: walletConnectProjectId,
   chains: [tempoMainnet],
   transports: {

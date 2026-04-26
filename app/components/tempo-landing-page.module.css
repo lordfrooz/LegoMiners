@@ -1076,6 +1076,7 @@
   .shell {
     height: auto;
     min-height: 100vh;
+    overflow-y: auto;
   }
 
   .hero {
@@ -1166,11 +1167,19 @@
 @media (max-width: 860px) {
   .page {
     padding: 0;
+    height: auto;
+    min-height: 100svh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .shell {
     border-radius: 0;
     padding: 18px 14px 22px;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .topBar {

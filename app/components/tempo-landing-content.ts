@@ -55,7 +55,6 @@ const landingContent: TempoLandingContent = {
   navigation: [
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
-    { label: "How It Works", href: "#how-it-works" },
     { label: "Tokenomics", href: "#tokenomics" },
     { label: "Roadmap", href: "#roadmap" },
     { label: "FAQ", href: "#faq" },
@@ -66,7 +65,6 @@ const landingContent: TempoLandingContent = {
     description:
       "Join the adventure, mine valuable resources, earn rewards, and build your legacy in the Lego Miners universe.",
     primaryCta: { label: "Go to Whitelist", href: "#whitelist" },
-    secondaryCta: { label: "How to Play", href: "/docs" },
     backgroundImage: "/landing.png",
   },
   stats: [

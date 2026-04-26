@@ -23,22 +23,22 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lego Miners | a new standart",
-  description: "Lego Miners | a new standart",
+  title: "Lego Miners | on @Base",
+  description: "Lego Miners | on @Base",
   openGraph: {
-    title: "Lego Miners | a new standart",
-    description: "Lego Miners | a new standart",
-    images: ["/legominers.jpg"],
+    title: "Lego Miners | on @Base",
+    description: "Lego Miners | on @Base",
+    images: ["/legominers.jpeg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lego Miners | a new standart",
-    description: "Lego Miners | a new standart",
-    images: ["/legominers.jpg"],
+    title: "Lego Miners | on @Base",
+    description: "Lego Miners | on @Base",
+    images: ["/legominers.jpeg"],
   },
   icons: {
-    icon: "/legominers.jpg",
-    apple: "/legominers.jpg",
+    icon: "/legominers.jpeg",
+    apple: "/legominers.jpeg",
   },
 };
 

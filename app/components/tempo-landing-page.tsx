@@ -141,7 +141,7 @@ export function TempoLandingPage() {
             <img
               alt="Lego Miners logo"
               className={styles.brandLogo}
-              src="/legominers.jpg"
+              src="/legominers.jpeg"
             />
             <span>Lego Miners</span>
           </a>
@@ -261,10 +261,6 @@ export function TempoLandingPage() {
                 >
                   <WalletIcon />
                   <span>{content.hero.primaryCta.label}</span>
-                </a>
-                <a className={styles.secondaryCta} href={content.hero.secondaryCta.href}>
-                  <PlayIcon />
-                  <span>{content.hero.secondaryCta.label}</span>
                 </a>
               </div>
 
