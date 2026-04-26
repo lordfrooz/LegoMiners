@@ -2480,9 +2480,25 @@ button {
   width: min(820px, calc(100% - 260px));
 }
 
+.game-hud-panel-leaderboard {
+  width: min(640px, calc(100% - 220px));
+  max-height: min(78vh, 680px);
+}
+
 .game-hud-panel-head {
   display: grid;
   gap: 6px;
+}
+
+.game-hud-panel-head-leaderboard {
+  gap: 4px;
+}
+
+.game-hud-panel-head-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .game-hud-panel-head .meta-label,
@@ -2501,6 +2517,15 @@ button {
   color: rgba(239, 247, 245, 0.92);
   font-size: 0.82rem;
   line-height: 1.45;
+}
+
+.game-hud-leaderboard-badge {
+  width: clamp(46px, 5vw, 64px);
+  height: auto;
+  align-self: end;
+  margin-bottom: -6px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
 }
 
 .game-hud-shop-grid,
@@ -2642,19 +2667,24 @@ button {
 
 .game-hud-leaderboard {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .game-hud-leaderboard-row {
   display: grid;
   grid-template-columns: 48px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 10px;
-  min-height: 52px;
-  padding: 0 14px;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.04);
+}
+
+.game-hud-leaderboard-row-placeholder {
+  border-style: dashed;
+  opacity: 0.76;
 }
 
 .game-hud-leaderboard-row-top {
@@ -2671,7 +2701,7 @@ button {
 .game-hud-leaderboard-row em {
   color: #dffab2;
   font-style: normal;
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -3760,6 +3790,11 @@ button {
   .game-hud-panel {
     width: min(700px, calc(100% - 180px));
     max-height: min(58vh, 500px);
+  }
+
+  .game-hud-panel-leaderboard {
+    width: min(600px, calc(100% - 180px));
+    max-height: min(74vh, 620px);
   }
 
   .game-hud-shop-layout {

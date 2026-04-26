@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import "@rainbow-me/rainbowkit/styles.css";
-import { IBM_Plex_Mono, Inter, Poppins } from "next/font/google";
+import { IBM_Plex_Mono, Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const display = Poppins({
+const display = Sora({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
+  weight: ["600", "700", "800"],
 });
 
-const body = Inter({
+const body = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["400", "500", "600", "700"],
@@ -23,22 +23,22 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TempoTopia | a new standart",
-  description: "TempoTopia | a new standart",
+  title: "Lego Miners | a new standart",
+  description: "Lego Miners | a new standart",
   openGraph: {
-    title: "TempoTopia | a new standart",
-    description: "TempoTopia | a new standart",
-    images: ["/logo.jpg"],
+    title: "Lego Miners | a new standart",
+    description: "Lego Miners | a new standart",
+    images: ["/legominers.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TempoTopia | a new standart",
-    description: "TempoTopia | a new standart",
-    images: ["/logo.jpg"],
+    title: "Lego Miners | a new standart",
+    description: "Lego Miners | a new standart",
+    images: ["/legominers.jpg"],
   },
   icons: {
-    icon: "/logo.jpg",
-    apple: "/logo.jpg",
+    icon: "/legominers.jpg",
+    apple: "/legominers.jpg",
   },
 };
 
