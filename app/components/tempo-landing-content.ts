@@ -33,7 +33,7 @@ export type TempoLandingContent = {
     headline: [string, string];
     description: string;
     primaryCta: TempoLandingLink;
-    secondaryCta: TempoLandingLink;
+    secondaryCta?: TempoLandingLink;
     backgroundImage: string;
   };
   stats: TempoLandingStat[];
