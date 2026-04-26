@@ -164,10 +164,6 @@ export function TempoLandingPage() {
               ))}
             </nav>
           </div>
-
-          <button className={styles.themeButton} aria-label="Appearance">
-            <SparkIcon />
-          </button>
         </div>
 
         {activeView === "leaderboard" ? (
@@ -320,10 +316,10 @@ export function TempoLandingPage() {
 
             <div className={styles.footerColumn}>
               <div className={styles.footerSocials}>
-                <a className={styles.footerSocialButton} href="#home" aria-label="X">
+                <a className={styles.footerSocialButton} href="https://x.com/legominers" target="_blank" rel="noopener noreferrer" aria-label="X">
                   X
                 </a>
-                <a className={styles.footerSocialButton} href="#home" aria-label="Website">
+                <a className={styles.footerSocialButton} href="https://legominers.xyz" target="_blank" rel="noopener noreferrer" aria-label="Website">
                   <WebsiteIcon />
                 </a>
               </div>

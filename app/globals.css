@@ -26,8 +26,17 @@
 html,
 body {
   margin: 0;
-  min-height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  background:
+    radial-gradient(circle at top left, rgba(223, 251, 123, 0.55), transparent 20%),
+    radial-gradient(circle at 78% 10%, rgba(255, 255, 255, 0.72), transparent 18%),
+    linear-gradient(180deg, #eef2e7 0%, #e7ece0 42%, #edf2e9 100%);
+  color: var(--text);
+  font-family: var(--font-body), sans-serif;
 }
 
 html::-webkit-scrollbar,
@@ -36,13 +45,8 @@ body::-webkit-scrollbar {
   height: 0;
 }
 
-body {
-  background:
-    radial-gradient(circle at top left, rgba(223, 251, 123, 0.55), transparent 20%),
-    radial-gradient(circle at 78% 10%, rgba(255, 255, 255, 0.72), transparent 18%),
-    linear-gradient(180deg, #eef2e7 0%, #e7ece0 42%, #edf2e9 100%);
-  color: var(--text);
-  font-family: var(--font-body), sans-serif;
+html {
+  scroll-behavior: smooth;
 }
 
 a {

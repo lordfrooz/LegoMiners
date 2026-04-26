@@ -8,7 +8,7 @@ import {
 } from "../../lib/whitelist";
 import type { WhitelistProgressRecord } from "../../lib/whitelist";
 
-const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY;
+const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY || process.env.TURNSTILE_SECRET;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 dakika
 const RATE_LIMIT_MAX = 5; // Pencere başına max istek
 const REFERRAL_XP_REWARD = 100;
@@ -42,12 +42,17 @@ function checkRateLimit(ip: string): boolean {
 }
 
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
-  if (!TURNSTILE_SECRET) return false;
+  if (!TURNSTILE_SECRET) {
+    console.log("[verifyTurnstile] TURNSTILE_SECRET not configured");
+    return false;
+  }
 
   const formData = new FormData();
   formData.append("secret", TURNSTILE_SECRET);
   formData.append("response", token);
-  formData.append("remoteip", ip);
+  if (ip && ip !== "unknown") {
+    formData.append("remoteip", ip);
+  }
 
   const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
     method: "POST",
@@ -55,6 +60,7 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
   });
 
   const data = await res.json();
+  console.log("[verifyTurnstile] result:", data);
   return data.success === true;
 }
 
@@ -126,8 +132,10 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     // IP al
-    const forwarded = request.headers.get("x-forwarded-for");
+    const forwarded = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip");
     const ip = forwarded ? forwarded.split(",")[0].trim() : "unknown";
+
+    console.log("[POST] headers forwarded:", forwarded, "ip:", ip);
 
     // Rate limit kontrolü
     if (!checkRateLimit(ip)) {
@@ -158,7 +166,9 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Missing CAPTCHA token" }, { status: 400 });
       }
 
+      console.log("[CAPTCHA] verifying with token:", turnstileToken?.slice(0, 20) + "...");
       const isHuman = await verifyTurnstile(turnstileToken, ip);
+      console.log("[CAPTCHA] result:", isHuman);
       if (!isHuman) {
         return NextResponse.json({ error: "CAPTCHA verification failed" }, { status: 403 });
       }

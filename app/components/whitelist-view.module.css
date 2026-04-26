@@ -3,7 +3,7 @@
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto auto;
   gap: 12px;
-  min-height: calc(100svh - 96px);
+  min-height: calc(100dvh - 96px);
   padding: 36px 16px 6px;
   animation: fadeIn 240ms ease-out;
   isolation: isolate;
@@ -1115,10 +1115,20 @@
 @media (max-width: 1180px) {
   .heroGrid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .heroCopy {
+    order: 1;
   }
 
   .walletPanel {
+    order: 2;
     width: 100%;
+  }
+
+  .rewardShowcase {
+    order: 3;
   }
 
   .walletPanelHead {
@@ -1146,10 +1156,8 @@
 @media (max-width: 760px) {
   .whitelistView {
     height: auto;
-    min-height: 100svh;
-    overflow-y: auto;
+    min-height: 100dvh;
     padding: 26px 10px 14px;
-    -webkit-overflow-scrolling: touch;
   }
 
   .backgroundLayer {

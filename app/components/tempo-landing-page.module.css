@@ -1,8 +1,7 @@
 .page {
   position: relative;
-  height: 100svh;
+  min-height: 100vh;
   padding: 10px;
-  overflow-y: auto;
   background:
     radial-gradient(circle at top, rgba(0, 82, 255, 0.14), transparent 24%),
     radial-gradient(circle at 82% 12%, rgba(51, 198, 255, 0.1), transparent 24%),
@@ -17,7 +16,7 @@
   grid-template-rows: minmax(0, 1fr) auto auto;
   align-content: start;
   width: min(1500px, 100%);
-  height: calc(100svh - 20px);
+  min-height: calc(100vh - 20px);
   margin: 0 auto;
   padding: 12px 20px 14px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -29,7 +28,6 @@
   box-shadow:
     0 28px 70px rgba(0, 0, 0, 0.32),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  touch-action: pan-y;
 }
 
 .hero,
@@ -55,6 +53,7 @@
   box-shadow: none;
   backdrop-filter: none;
   z-index: 3;
+  touch-action: none;
 }
 
 .topNavRail {
@@ -1071,13 +1070,11 @@
 @media (max-width: 1320px) {
   .page {
     height: auto;
-    overflow: auto;
   }
 
   .shell {
     height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
+    min-height: auto;
   }
 
   .hero {
@@ -1168,8 +1165,7 @@
 @media (max-width: 860px) {
   .page {
     padding: 0;
-    height: auto;
-    min-height: 100svh;
+    height: 100svh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -1178,9 +1174,7 @@
     border-radius: 0;
     padding: 18px 14px 22px;
     height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    min-height: 100svh;
   }
 
   .topBar {

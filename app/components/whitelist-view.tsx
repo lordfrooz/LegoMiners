@@ -296,10 +296,10 @@ function WhitelistFooter() {
 
       <div className={styles.footerColumn}>
         <div className={styles.footerSocials}>
-          <a className={styles.footerSocialButton} href="#whitelist" aria-label="X">
+          <a className={styles.footerSocialButton} href="https://x.com/legominers" target="_blank" rel="noopener noreferrer" aria-label="X">
             <XIcon />
           </a>
-          <a className={styles.footerSocialButton} href="#whitelist" aria-label="Website">
+          <a className={styles.footerSocialButton} href="https://legominers.xyz" target="_blank" rel="noopener noreferrer" aria-label="Website">
             <WebsiteIcon />
           </a>
         </div>
@@ -809,31 +809,6 @@ export function WhitelistView() {
             Connect your wallet, drop your X handle, complete the tasks and earn a chance to receive a{" "}
             <span className={styles.descriptionAccent}>Free Miner & Airdrop</span> at launch.
           </p>
-
-          <div className={styles.rewardShowcase}>
-            <div className={styles.rewardVisual}>
-              <img alt="Free Miner and airdrop reward" className={styles.rewardImage} src="/freeminer.png" />
-            </div>
-
-            <div className={styles.rewardContent}>
-              <span className={styles.rewardKicker}>LAUNCH REWARD</span>
-              <h2 className={styles.rewardTitle}>Free Miner & Airdrop</h2>
-              <ul className={styles.rewardList}>
-                <li>
-                  <SparkIcon />
-                  <span>Early mining boost</span>
-                </li>
-                <li>
-                  <LockIcon />
-                  <span>Exclusive access</span>
-                </li>
-                <li>
-                  <GiftIcon />
-                  <span>Tradable on launch</span>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
 
         <div className={styles.walletPanel}>
@@ -870,6 +845,31 @@ export function WhitelistView() {
               <LockIcon />
               <span>We never store your private keys.</span>
             </div>
+          </div>
+        </div>
+
+        <div className={styles.rewardShowcase}>
+          <div className={styles.rewardVisual}>
+            <img alt="Free Miner and airdrop reward" className={styles.rewardImage} src="/freeminer.png" />
+          </div>
+
+          <div className={styles.rewardContent}>
+            <span className={styles.rewardKicker}>LAUNCH REWARD</span>
+            <h2 className={styles.rewardTitle}>Free Miner & Airdrop</h2>
+            <ul className={styles.rewardList}>
+              <li>
+                <SparkIcon />
+                <span>Early mining boost</span>
+              </li>
+              <li>
+                <LockIcon />
+                <span>Exclusive access</span>
+              </li>
+              <li>
+                <GiftIcon />
+                <span>Tradable on launch</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

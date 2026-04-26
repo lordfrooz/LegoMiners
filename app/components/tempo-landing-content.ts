@@ -88,7 +88,7 @@ const landingContent: TempoLandingContent = {
       title: "Collect & Upgrade",
       description:
         "Collect rare NFTs, upgrade your gear, and increase your mining power.",
-      href: "/docs",
+      href: "#whitelist",
     },
     {
       art: "trophy",
@@ -96,7 +96,7 @@ const landingContent: TempoLandingContent = {
       title: "Compete & Climb",
       description:
         "Compete on leaderboards, join tournaments, and become the ultimate miner.",
-      href: "/docs",
+      href: "#whitelist",
     },
   ],
   footer: {
