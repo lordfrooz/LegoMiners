@@ -876,17 +876,6 @@ export function WhitelistView() {
 
       <div className={styles.statsGrid}>
         <article className={styles.statCard}>
-          <div className={`${styles.statOrb} ${styles.statOrbPeople}`.trim()}>
-            <StatIcon kind="users" />
-          </div>
-          <span className={styles.statTitle}>TOTAL ENTRIES</span>
-          <strong className={`${styles.statValue} ${styles.statValueGreen}`.trim()}>
-            {stats.totalEntries.toLocaleString()}
-          </strong>
-          <p className={styles.statMeta}>Live whitelist entries</p>
-        </article>
-
-        <article className={styles.statCard}>
           <div className={`${styles.statOrb} ${styles.statOrbTask}`.trim()}>
             <StatIcon kind="tasks" />
           </div>

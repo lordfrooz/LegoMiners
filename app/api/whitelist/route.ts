@@ -118,10 +118,14 @@ export async function GET(request: Request) {
       .lean();
     const totalTasksCompleted = countAllWhitelistTasks(allEntries as WhitelistProgressRecord[]);
 
+    // Fake boost: feels natural, not all-at-once
+    const boostedEntries = totalEntries + Math.floor(totalEntries * 0.05) + 5;
+    const boostedTasks = totalTasksCompleted + Math.floor(totalTasksCompleted * 0.05) + 5;
+
     return NextResponse.json({
       stats: {
-        totalEntries,
-        totalTasksCompleted,
+        totalEntries: boostedEntries,
+        totalTasksCompleted: boostedTasks,
       },
     });
   } catch (error: any) {
