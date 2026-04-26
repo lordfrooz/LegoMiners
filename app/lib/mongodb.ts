@@ -69,6 +69,23 @@ const WhitelistSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    referralCode: {
+      type: String,
+      default: "",
+      index: true,
+    },
+    referredByCode: {
+      type: String,
+      default: "",
+    },
+    referralXp: {
+      type: Number,
+      default: 0,
+    },
+    referralCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
