@@ -25,7 +25,6 @@ const whitelistTasks = [
     label: "Share",
     description: "Share on your profile",
     xp: 120,
-    href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(WHITELIST_SHARE_TEXT)}&url=${encodeURIComponent(WHITELIST_SHARE_URL)}`,
   },
   {
     id: "retweet",
@@ -488,7 +487,7 @@ export function WhitelistView() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          twitterHandle: nextTwitterHandle || "pending_" + Date.now(),
+          twitterHandle: nextTwitterHandle || undefined,
           walletAddress: overrides.walletAddress ?? walletAddress,
           completedTasks: overrides.completedTasks ?? completedTasks,
           whitelistStep: whitelistStep,
@@ -662,11 +661,17 @@ export function WhitelistView() {
           <div className={styles.taskList}>
             {whitelistTasks.map((task) => {
               const completed = completedTasks.includes(task.id);
+              const shareText = ownReferralCode
+                ? `Joining Lego Miners Early Access on @${WHITELIST_X_ACCOUNT}. Built on Base for early supporters.\n\nUse my code: ${ownReferralCode}`
+                : WHITELIST_SHARE_TEXT;
+              const taskHref = task.id === "share"
+                ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(WHITELIST_SHARE_URL)}`
+                : task.href;
               return (
                 <button
                   key={task.id}
                   className={`${styles.taskItem} ${completed ? styles.taskItemDone : ""}`.trim()}
-                  onClick={() => handleTaskClick(task.id, task.href)}
+                  onClick={() => handleTaskClick(task.id, taskHref!)}
                   type="button"
                 >
                   <span className={styles.taskItemIcon}>

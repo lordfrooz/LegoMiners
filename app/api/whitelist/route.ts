@@ -74,6 +74,10 @@ function buildReferralCodeSeed(twitterHandle: string) {
   return `${cleanHandle || "MINER"}${suffix}`;
 }
 
+function isPendingHandle(handle: string) {
+  return handle.startsWith("pending_");
+}
+
 async function createUniqueReferralCode(twitterHandle: string) {
   for (let attempt = 0; attempt < 6; attempt++) {
     const code = buildReferralCodeSeed(twitterHandle);
@@ -205,7 +209,8 @@ export async function POST(request: Request) {
       query = { twitterHandle: normalizedHandle };
     }
 
-    const referralCode = existingWhitelist?.referralCode || await createUniqueReferralCode(normalizedHandle || "WALLET");
+    const safeHandle = normalizedHandle?.startsWith("pending_") ? "WALLET" : (normalizedHandle || "WALLET");
+    const referralCode = existingWhitelist?.referralCode || await createUniqueReferralCode(safeHandle);
     let referredByCode = existingWhitelist?.referredByCode || "";
     let referralAwarded = false;
     let referralOwner = null;
