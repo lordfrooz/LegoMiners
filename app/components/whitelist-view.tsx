@@ -14,6 +14,12 @@ import {
 } from "../lib/whitelist";
 import styles from "./whitelist-view.module.css";
 
+function buildReferralCode(handle: string) {
+  const clean = handle.replace(/[^a-zA-Z0-9]/g, "").toUpperCase().slice(0, 8);
+  const suffix = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `${clean}${suffix}`;
+}
+
 const WHITELIST_X_ACCOUNT = process.env.NEXT_PUBLIC_WHITELIST_X_ACCOUNT as string;
 const WHITELIST_TWEET_ID = process.env.NEXT_PUBLIC_WHITELIST_TWEET_ID as string;
 const WHITELIST_SHARE_TEXT = `Joining Lego Miners Early Access on @${WHITELIST_X_ACCOUNT}. Built on Base for early supporters.`;
@@ -477,6 +483,7 @@ export function WhitelistView() {
     whitelistStep: string;
     isWhitelistSubmitted: boolean;
     turnstileToken: string | null;
+    referralCode?: string;
   }> = {}) {
     const nextTwitterHandle = normalizeTwitterHandle(overrides.twitterHandle ?? normalizedTwitter);
     const whitelistStep = overrides.whitelistStep ?? (step === 3 || step === 4 ? "tasks" : "wallet");
@@ -493,6 +500,7 @@ export function WhitelistView() {
           whitelistStep: whitelistStep,
           isWhitelistSubmitted: overrides.isWhitelistSubmitted ?? false,
           turnstileToken: overrides.turnstileToken,
+          referralCode: overrides.referralCode,
         }),
       });
     } catch {
@@ -533,8 +541,12 @@ export function WhitelistView() {
       // If restore fails, continue with the local flow below.
     }
 
+    // Generate referral code client-side now that we have a real twitter handle
+    const newCode = buildReferralCode(nextTwitterHandle);
+    setOwnReferralCode(newCode);
+
     setStep(3);
-    void saveProgress({ twitterHandle: nextTwitterHandle, whitelistStep: "tasks" });
+    void saveProgress({ twitterHandle: nextTwitterHandle, whitelistStep: "tasks", referralCode: newCode });
   }
 
   async function handleSubmit() {

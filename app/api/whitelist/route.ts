@@ -162,6 +162,7 @@ export async function POST(request: Request) {
       isWhitelistSubmitted,
       turnstileToken,
       referralCodeInput,
+      referralCode,
     } = body;
 
     if (!twitterHandle && isWhitelistSubmitted) {
@@ -210,12 +211,15 @@ export async function POST(request: Request) {
     }
 
     const safeHandle = normalizedHandle?.startsWith("pending_") ? "WALLET" : (normalizedHandle || "WALLET");
-    const referralCode = existingWhitelist?.referralCode || await createUniqueReferralCode(safeHandle);
+    // Client-provided referral code takes priority (generated from twitter handle)
+    const clientCode = (typeof referralCode === "string" && referralCode) || "";
+    const existingCode = existingWhitelist?.referralCode || "";
+    const finalReferralCode = clientCode || existingCode;
     let referredByCode = existingWhitelist?.referredByCode || "";
     let referralAwarded = false;
     let referralOwner = null;
 
-    if (isWhitelistSubmitted && normalizedReferralCodeInput && !referredByCode && normalizedReferralCodeInput !== referralCode) {
+    if (isWhitelistSubmitted && normalizedReferralCodeInput && !referredByCode && normalizedReferralCodeInput !== finalReferralCode) {
       referralOwner = await Whitelist.findOne({ referralCode: normalizedReferralCodeInput });
 
       if (referralOwner && referralOwner.twitterHandle !== normalizedHandle) {
@@ -231,7 +235,7 @@ export async function POST(request: Request) {
     if (completedTasks) updateData.completedTasks = completedTasks;
     if (whitelistStep) updateData.whitelistStep = whitelistStep;
     if (isWhitelistSubmitted !== undefined) updateData.isWhitelistSubmitted = isWhitelistSubmitted;
-    if (referralCode) updateData.referralCode = referralCode;
+    if (finalReferralCode) updateData.referralCode = finalReferralCode;
     if (referredByCode) updateData.referredByCode = referredByCode;
     if (normalizedHandle) updateData.twitterHandle = normalizedHandle;
 
