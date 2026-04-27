@@ -301,7 +301,7 @@ function WhitelistFooter() {
 
       <div className={styles.footerColumn}>
         <div className={styles.footerSocials}>
-          <a className={styles.footerSocialButton} href="https://x.com/legominers" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <a className={styles.footerSocialButton} href="https://x.com/legominersxyz" target="_blank" rel="noopener noreferrer" aria-label="X">
             <XIcon />
           </a>
           <a className={styles.footerSocialButton} href="https://legominers.xyz" target="_blank" rel="noopener noreferrer" aria-label="Website">

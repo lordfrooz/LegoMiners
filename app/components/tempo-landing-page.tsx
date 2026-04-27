@@ -136,34 +136,54 @@ export function TempoLandingPage() {
               : `url(${content.hero.backgroundImage})`,
         }}
       >
-        <div className={styles.topBar}>
-          <a className={styles.brandLockup} href="#home" aria-label="Lego Miners home">
-            <img
-              alt="Lego Miners logo"
-              className={styles.brandLogo}
-              src="/legominers.jpeg"
-            />
-            <span>Lego Miners</span>
-          </a>
+        <div className={styles.topStack}>
+          <div className={styles.topBar}>
+            <a className={styles.brandLockup} href="#home" aria-label="Lego Miners home">
+              <img
+                alt="Lego Miners logo"
+                className={styles.brandLogo}
+                src="/legominers.jpeg"
+              />
+              <span>Lego Miners</span>
+            </a>
 
-          <div className={styles.topNavRail}>
-            <nav className={styles.topNav} aria-label="Primary">
-              {NAV_ITEMS.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  className={`${styles.topNavLink} ${activeNavItem === item.id ? styles.topNavLinkActive : ""}`.trim()}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveNavItem(item.id);
-                    setActiveView(item.view);
-                  }}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
+            <div className={styles.topNavRail}>
+              <nav className={styles.topNav} aria-label="Primary">
+                {NAV_ITEMS.map((item) => (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    className={`${styles.topNavLink} ${activeNavItem === item.id ? styles.topNavLinkActive : ""}`.trim()}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveNavItem(item.id);
+                      setActiveView(item.view);
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
           </div>
+
+          <a
+            className={styles.announcementBar}
+            href="https://x.com/legominersxyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit the new Lego Miners X account"
+          >
+            <span className={styles.announcementBadge}>Announcement</span>
+            <span className={styles.announcementText}>
+              Our old X account got suspended. Follow our new account
+              <strong>@legominersxyz</strong>
+            </span>
+            <span className={styles.announcementCta}>
+              Click to follow
+              <ArrowIcon />
+            </span>
+          </a>
         </div>
 
         {activeView === "leaderboard" ? (
@@ -316,7 +336,7 @@ export function TempoLandingPage() {
 
             <div className={styles.footerColumn}>
               <div className={styles.footerSocials}>
-                <a className={styles.footerSocialButton} href="https://x.com/legominers" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <a className={styles.footerSocialButton} href="https://x.com/legominersxyz" target="_blank" rel="noopener noreferrer" aria-label="X">
                   X
                 </a>
                 <a className={styles.footerSocialButton} href="https://legominers.xyz" target="_blank" rel="noopener noreferrer" aria-label="Website">
